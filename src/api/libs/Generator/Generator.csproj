@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- <TargetFramework>netstandard2.0</TargetFramework> -->
+    <AssemblyName>Sisa.Generator</AssemblyName>
+    <RootNamespace>Sisa.Generator</RootNamespace>
+    <IsRoslynComponent>true</IsRoslynComponent>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <PackageScribanIncludeSource>true</PackageScribanIncludeSource>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" PrivateAssets="all" />
+    <PackageReference Include="Scriban" IncludeAssets="Build" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Core/Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="DependencyInjection\Templates\*.sbn-cs" />
+    <EmbeddedResource Include="DependencyInjection\Templates\*.sbn-cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Mediator\Templates\*.sbn-cs" />
+    <EmbeddedResource Include="Mediator\Templates\*.sbn-cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="FluentValidation\Templates\*.sbn-cs" />
+    <EmbeddedResource Include="FluentValidation\Templates\*.sbn-cs" />
+  </ItemGroup>
+
+</Project>

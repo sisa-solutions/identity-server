@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Sisa.Identity.Domain</AssemblyName>
+    <RootNamespace>Sisa.Identity.Domain</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../../libs/Core/Core.csproj" />
+  </ItemGroup>
+
+</Project>

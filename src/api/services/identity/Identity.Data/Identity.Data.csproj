@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Sisa.Identity.Data</AssemblyName>
+    <RootNamespace>Sisa.Identity.Data</RootNamespace>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+  </PropertyGroup>
+
+  <!-- Libs -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\libs\Data\Data.csproj" />
+    <ProjectReference Include="..\..\..\libs\Data.PostgreSQL\Data.PostgreSQL.csproj" />
+    <ProjectReference Include="..\..\..\libs\Generator\Generator.csproj"
+      OutputItemType="Analyzer"
+      ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <!-- Dependencies -->
+  <ItemGroup>
+    <ProjectReference Include="..\Identity.Domain\Identity.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,12 @@
+{
+  "name": "@sisa/next-config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "peerDependencies": {
+    "next": "^13.5.6"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

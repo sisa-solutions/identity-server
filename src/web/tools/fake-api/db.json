@@ -1,0 +1,142 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "json-server123",
+      "slug": "json-server123",
+      "picture": "https://images.unsplash.com/photo-1682687220566-5599dbbebf11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1375&q=80",
+      "description": "<p><strong>Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges.</strong></p>",
+      "parentId": "3"
+    },
+    {
+      "id": 2,
+      "name": "json-server",
+      "slug": "json-server",
+      "picture": "https://images.unsplash.com/photo-1682687220566-5599dbbebf11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1375&q=80",
+      "description": "Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges."
+    },
+    {
+      "name": "Category 1",
+      "slug": "category-1",
+      "description": "Category 1 description",
+      "id": 3
+    },
+    {
+      "name": "Category 1",
+      "slug": "category-1",
+      "description": "Category 1 description",
+      "id": 4
+    },
+    {
+      "name": "Category 1",
+      "slug": "category-1",
+      "description": "Category 1 description",
+      "id": 5
+    },
+    {
+      "name": "HAHAH",
+      "slug": "s",
+      "description": "<p>ssssssssssssss</p>",
+      "id": 6
+    },
+    {
+      "name": "HAHAH",
+      "slug": "sssssssssssss",
+      "description": "<blockquote><sub><s>ssssssssssssssssssss</s></sub></blockquote>",
+      "id": 7
+    },
+    {
+      "name": "HAHAH",
+      "parentId": [
+        "1",
+        "3"
+      ],
+      "id": 8
+    },
+    {
+      "id": 9
+    },
+    {
+      "description": "",
+      "name": "",
+      "slug": "",
+      "id": 10
+    },
+    {
+      "description": "",
+      "name": "",
+      "slug": "",
+      "id": 11
+    },
+    {
+      "description": "",
+      "name": "",
+      "slug": "",
+      "id": 12
+    },
+    {
+      "description": "",
+      "name": "",
+      "slug": "",
+      "id": 13
+    },
+    {
+      "description": "",
+      "name": "",
+      "slug": "",
+      "id": 14
+    },
+    {
+      "description": "",
+      "name": "uuuuuuuu",
+      "slug": "",
+      "parentId": "1",
+      "id": 15
+    },
+    {
+      "id": 16
+    },
+    {
+      "description": "",
+      "name": "",
+      "slug": "",
+      "id": 17
+    },
+    {
+      "parentId": "2",
+      "description": "<p>\t\t\t\t\t\t\t</p><p>\t</p><p><br></p><p><br></p><p>\t</p>",
+      "id": 18
+    },
+    {
+      "description": "",
+      "name": "",
+      "slug": "",
+      "id": 19
+    }
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "slug": "json-server",
+      "description": "Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges."
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

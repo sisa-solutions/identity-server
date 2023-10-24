@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Sisa.Identity.DbMigrator</AssemblyName>
+    <RootNamespace>Sisa.Identity.DbMigrator</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!-- libs -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\libs\Data\Data.csproj" />
+    <ProjectReference Include="..\..\libs\Infrastructure\Infrastructure.csproj" />
+  </ItemGroup>
+
+  <!-- dependencies -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\services\identity\Identity.Data\Identity.Data.csproj" />
+  </ItemGroup>
+
+</Project>

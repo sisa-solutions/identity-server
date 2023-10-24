@@ -1,0 +1,53 @@
+version: '3.9'
+
+services:
+  # redis:
+  #   image: redis:7-alpine
+  #   volumes:
+  #     - ~/.containers/volumes/redis:/data
+  #   ports:
+  #     - 6379:6379
+  #   container_name: redis-caching
+
+  # mssql:
+  #   image: mcr.microsoft.com/mssql/server:2019-latest
+  #   user: root
+  #   volumes:
+  #     - ~/.containers/volumes/mssql/data:/var/opt/mssql/data
+  #     - ~/.containers/volumes/mssql/log:/var/opt/mssql/log
+  #     - ~/.containers/volumes/mssql/secrets:/var/opt/mssql/secrets
+  #   ports:
+  #     - 1433:1433
+  #   container_name: mssql
+  #   environment:
+  #     - ACCEPT_EULA=Y
+  #     - MSSQL_PID=Developer
+  #     - MSSQL_SA_PASSWORD=P#ssw0rd
+
+  # rabbitmq:
+  #   image: rabbitmq:3.9-management-alpine
+  #   volumes:
+  #     - ~/.containers/volumes/rabbitmq:/var/lib/rabbitmq
+  #   ports:
+  #     - 5672:5672
+  #     - 15672:15672
+  #   container_name: rabbitmq
+  #   environment:
+  #     - RABBITMQ_DEFAULT_USER=crm_dev
+  #     - RABBITMQ_DEFAULT_PASS=P#ssw0rd
+
+  postgresql:
+    image: postgres:16-alpine
+    volumes:
+      - ~/.containers/volumes/postgresql:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    container_name: postgresql
+    environment:
+      - TZ=UTC
+      - POSTGRES_PASSWORD=P#ssw0rd
+    networks:
+      - sisa-cafe
+
+networks:
+  sisa-cafe:

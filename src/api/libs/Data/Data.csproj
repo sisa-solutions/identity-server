@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Sisa.Data</AssemblyName>
+    <RootNamespace>Sisa.Data</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- <PackageReference Include="EFCore.NamingConventions" /> -->
+    <!-- <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" /> -->
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Core/Core.csproj" />
+  </ItemGroup>
+
+</Project>
