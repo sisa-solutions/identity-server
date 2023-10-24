@@ -1,18 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <AssemblyName>Sisa.Identity.Infrastructure</AssemblyName>
     <RootNamespace>Sisa.Identity.Infrastructure</RootNamespace>
   </PropertyGroup>
 
-  <!-- Libs -->
   <ItemGroup>
+    <ProjectReference Include="..\Identity.Domain\Identity.Domain.csproj" />
     <ProjectReference Include="..\..\..\libs\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
-  <!-- Dependencies -->
   <ItemGroup>
-    <ProjectReference Include="..\Identity.Domain\Identity.Domain.csproj" />
+    <EmbeddedResource Include="EmailTemplates\*.cshtml" />
   </ItemGroup>
 
 </Project>

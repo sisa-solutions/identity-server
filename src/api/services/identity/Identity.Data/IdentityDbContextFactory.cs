@@ -4,15 +4,13 @@ using Microsoft.Extensions.Logging;
 namespace Sisa.Identity.Data;
 
 public class IdentityDbContextFactory(
-    IDbContextFactory<IdentityDbContext> pooledFactory,
-    ILogger<IdentityDbContext> logger
-) : IDbContextFactory<IdentityDbContext>
+    IDbContextFactory<IdentityDbContext> pooledFactory) : IDbContextFactory<IdentityDbContext>
 {
     public IdentityDbContext CreateDbContext()
     {
         var context = pooledFactory.CreateDbContext();
 
-        context.ConfigureLogger(logger);
+        // context.ConfigureLogger(logger);
 
         return context;
     }

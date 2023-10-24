@@ -1,0 +1,48 @@
+@model Sisa.Identity.Infrastructure.EmailTemplates.AccountInformationModel;
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Account Information - Sisa Co., Ltd</title>
+    <meta name="description" content="Account Information - Sisa Co., Ltd" />
+    <meta name="author" content="Sang Au" />
+
+    <meta name="theme-color" content="#000000" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <meta property="og:title" content="Account Information - Sisa Co., Ltd" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sisa.io" />
+  </head>
+
+  <body>
+    <div>
+      <p>
+        Dear @Model.FullName,
+      </p>
+      <p>
+        Your @Model.OrgName account has been created.
+        Please use the following information to log in to your account:
+      </p>
+      <p>
+        UserName: @Model.UserName
+      </p>
+      <p>
+        Password: @Model.Password
+      </p>
+      <p>
+        Please log in to your account as soon as possible and change your password for security purposes.
+        If you did not create this account or did not receive this email,
+        please contact our support team immediately at <a href="mailto:@Model.SupportEmail">@Model.SupportName</a>.
+      </p>
+      <br />
+      <p>
+        Best regards,
+        <br />
+        @Model.SupportName
+      </p>
+    </div>
+  </body>
+</html>

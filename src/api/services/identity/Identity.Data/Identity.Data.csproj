@@ -1,10 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <AssemblyName>Sisa.Identity.Data</AssemblyName>
     <RootNamespace>Sisa.Identity.Data</RootNamespace>
-    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenIddict.EntityFrameworkCore" />
+  </ItemGroup>
 
   <!-- Libs -->
   <ItemGroup>

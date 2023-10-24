@@ -1,0 +1,47 @@
+@model Sisa.Identity.Infrastructure.EmailTemplates.TwoFactorAuthenticationModel;
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Two Factor Authentication Token - Sisa Co., Ltd</title>
+    <meta name="description" content="Two Factor Authentication Token - Sisa Co., Ltd" />
+    <meta name="author" content="Sang Au" />
+
+    <meta name="theme-color" content="#000000" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <meta property="og:title" content="Two Factor Authentication Token - Sisa Co., Ltd" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sisa.io" />
+  </head>
+
+  <body>
+    <div>
+      <p>
+        Dear @Model.FullName,
+      </p>
+      <p>
+        To enhance the security of your @Model.OrgName account,
+        we have enabled Two-Factor Authentication (2FA) on your account.
+        Your 2FA token is:
+      </p>
+      <p>@Model.Token</p>
+      <p>
+        Please enter this token when prompted during the login process.
+        If you did not enable 2FA on your account or did not request this token,
+        please contact our support team immediately at <a href="mailto:@Model.ContactEmail">@Model.ContactName</a>.
+      </p>
+      <br />
+      <p>
+        Thank you for choosing @Model.OrgName.
+      </p>
+      <p>
+        Best regards,
+        <br />
+        @Model.ContactName
+      </p>
+    </div>
+  </body>
+</html>

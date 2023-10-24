@@ -9,6 +9,8 @@
     <PackageVersion Include="Microsoft.Extensions.Http.Polly" Version="8.0.0-rc.2.23480.2" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="8.0.0-rc.2.23479.6" />
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="8.0.0-rc.2.23479.6" />
+    <PackageVersion Include="Microsoft.AspNetCore.SpaServices.Extensions"
+      Version="8.0.0-rc.2.23480.2" />
   </ItemGroup>
 
   <!-- Analyzers -->
@@ -32,6 +34,23 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0-rc.2.23480.1" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.0-rc.2.23480.1" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0-rc.2" />
+  </ItemGroup>
+
+  <!-- Identity -->
+  <ItemGroup>
+    <PackageVersion Include="AspNet.Security.OAuth.Apple" Version="7.0.4" />
+    <PackageVersion Include="AspNet.Security.OAuth.GitHub" Version="7.0.4" />
+
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.Google"
+      Version="8.0.0-rc.2.23480.2" />
+    <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore"
+      Version="8.0.0-rc.2.23480.2" />
+
+    <PackageVersion Include="OpenIddict.Abstractions" Version="5.0.0-preview1.23520.63" />
+    <PackageVersion Include="OpenIddict.AspNetCore" Version="5.0.0-preview1.23520.63" />
+    <PackageVersion Include="OpenIddict.EntityFrameworkCore" Version="5.0.0-preview1.23520.63" />
+    <PackageVersion Include="OpenIddict.EntityFrameworkCore.Models"
+      Version="5.0.0-preview1.23520.63" />
   </ItemGroup>
 
   <ItemGroup>

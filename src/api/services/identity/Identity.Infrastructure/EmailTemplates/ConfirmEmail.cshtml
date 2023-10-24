@@ -1,0 +1,50 @@
+@model Sisa.Identity.Infrastructure.EmailTemplates.ConfirmEmailModel;
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Confirm Email - Sisa Co., Ltd</title>
+    <meta name="description" content="Confirm Email - Sisa Co., Ltd" />
+    <meta name="author" content="Sang Au" />
+
+    <meta name="theme-color" content="#000000" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <meta property="og:title" content="Confirm Email - Sisa Co., Ltd" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sisa.io" />
+  </head>
+
+  <body>
+    <div>
+      <p>
+        Dear @Model.FullName,
+      </p>
+      <p>
+        Welcome to @Model.OrgName! Thank you for registering with us.
+        To activate your account and access our services,
+        we need to verify your email address.
+      </p>
+      <p>
+        Please click the button below to confirm your email address:
+      </p>
+      <a href="@Model.ConfirmEmailUrl">Confirm Email</a>
+      <p>
+        If you have trouble confirming your email,
+        please copy and paste the following link into your browser's address bar:
+      </p>
+      <p>@Model.ConfirmEmailUrl</p>
+      <p>
+        Thank you for choosing @Model.OrgName.
+      </p>
+      <br />
+      <p>
+        Best regards,
+        <br />
+        @Model.ContactName
+      </p>
+    </div>
+  </body>
+</html>

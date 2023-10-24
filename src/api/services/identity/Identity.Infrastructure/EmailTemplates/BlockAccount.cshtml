@@ -1,0 +1,48 @@
+@model Sisa.Identity.Infrastructure.EmailTemplates.BlockAccountModel;
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Confirm Email - Sisa Co., Ltd</title>
+    <meta name="description" content="Confirm Email - Sisa Co., Ltd" />
+    <meta name="author" content="Sang Au" />
+
+    <meta name="theme-color" content="#000000" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <meta property="og:title" content="Confirm Email - Sisa Co., Ltd" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sisa.io" />
+  </head>
+
+  <body>
+    <div>
+      <p>
+        Dear @Model.FullName,
+      </p>
+      <p>
+        We're sorry to inform you that your @Model.OrgName account has been locked due to multiple failed login attempts.
+        For security reasons, your account has been locked for @Model.LockoutDuration hours.
+      </p>
+      <p>
+        If you believe this was a mistake, please wait @Model.LockoutDuration hours and try logging in again.
+        If you continue to experience issues, please contact our support team at <a href="mailto:@Model.ContactEmail">@Model.ContactName</a>.
+      </p>
+      <p>
+        To prevent unauthorized access to your account,
+        please ensure that you keep your password secure and do not share it with anyone.
+      </p>
+      <p>
+        Thank you for choosing @Model.OrgName.
+      </p>
+      <br />
+      <p>
+        Best regards,
+        <br />
+        @Model.ContactName
+      </p>
+    </div>
+  </body>
+</html>
