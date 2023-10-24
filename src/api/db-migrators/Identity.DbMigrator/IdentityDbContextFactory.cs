@@ -19,10 +19,10 @@ public class IdentityDbContextFactory : IDesignTimeDbContextFactory<IdentityDbCo
 
     /*
      * cd db-migrators/Identity.DbMigrator
-     * dotnet ef migrations add Initialize -c Sisa.Identity.Data.Identity -o PostgreSQL/Migrations
+     * dotnet ef migrations add Initialize -c Sisa.Identity.Data.IdentityDbContext -o PostgreSQL/Migrations
      *
-     * dotnet ef migrations script -i -c Sisa.Identity.Data.Identity -o PostgreSQL/Scripts/000_Snapshot.sql
+     * dotnet ef migrations script -i -c Sisa.Identity.Data.IdentityDbContext -o PostgreSQL/Scripts/000_Snapshot.sql
      *
-     * dotnet ef migrations script -i -c Sisa.Identity.Data.Identity 0 Initialize -o PostgreSQL/Scripts/010_Initialize.sql
+     * dotnet ef migrations script -i -c Sisa.Identity.Data.IdentityDbContext 0 Initialize -o PostgreSQL/Scripts/010_Initialize.sql
      */
 }
