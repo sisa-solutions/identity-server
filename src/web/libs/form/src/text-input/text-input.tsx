@@ -20,14 +20,25 @@ const TextInput = forwardRef<HTMLDivElement, TextInputProps>(
     ref
   ) => {
     return (
-      <FormControl required={required} error={error} disabled={disabled} sx={sx} size={size}>
-        <Box>
-          {label && <FormLabel>{label}</FormLabel>}
-          {helperMessage && <Typography level="body-sm">{helperMessage}</Typography>}
+      <FormControl
+        className="form-control"
+        required={required}
+        error={error}
+        disabled={disabled}
+        sx={sx}
+        size={size}
+      >
+        <Box className="form-label-group">
+          {label && <FormLabel className="form-label">{label}</FormLabel>}
+          {helperMessage && (
+            <Typography level="body-sm" className="form-helper">
+              {helperMessage}
+            </Typography>
+          )}
         </Box>
         <Box>
           <Input ref={ref} {...inputProps} />
-          {errorMessage && <FormHelperText>{errorMessage}</FormHelperText>}
+          {errorMessage && <FormHelperText className="form-error">{errorMessage}</FormHelperText>}
         </Box>
       </FormControl>
     );

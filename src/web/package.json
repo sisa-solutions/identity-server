@@ -12,10 +12,9 @@
   ],
   "scripts": {
     "fake-db": "turbo run dev --filter=@sisa/fake-api",
-    "dev:admin": "turbo run dev --filter=@sisa/admin",
-    "dev:front": "turbo run dev --filter=@sisa/front",
-    "build:admin": "turbo run build --filter=@sisa/admin --no-daemon",
-    "release:admin": "turbo build --filter=@sisa/admin^... && changeset publish",
+    "dev:identity": "turbo run dev --filter=@sisa/identity",
+    "build:identity": "turbo run build --filter=@sisa/identity --no-daemon",
+    "release:identity": "turbo build --filter=@sisa/identity^... && changeset publish",
     "dev": "turbo run dev",
     "build": "turbo run build --no-daemon",
     "start": "turbo run start",

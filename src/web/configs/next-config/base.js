@@ -52,9 +52,6 @@ module.exports = {
     });
   },
   experimental: {
-    mdxRs: true,
-    serverActions: true,
-    typedRoutes: true,
     optimizePackageImports: ['@sisa/form', '@sisa/i18n'],
   },
 };

@@ -1,0 +1,18 @@
+{
+  "extends": "@sisa/tsconfig/nextjs.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": "./src"
+  },
+  "include": [
+    "next-env.d.ts",
+    "src",
+    ".next/types/**/*.ts",
+    "../../libs/components/src/pages/index.ts"
+  ],
+  "exclude": ["node_modules"]
+}
