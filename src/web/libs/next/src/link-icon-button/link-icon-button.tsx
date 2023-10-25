@@ -12,6 +12,7 @@ const LinkIconButton = ({
   locale,
   scroll,
   shallow,
+  underline,
   ...rest
 }: Props) => {
   return (
@@ -24,6 +25,7 @@ const LinkIconButton = ({
         scroll={scroll}
         shallow={shallow}
         overlay={true}
+        underline={underline}
       >
         {children}
       </Link>

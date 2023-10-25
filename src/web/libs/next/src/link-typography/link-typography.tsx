@@ -12,6 +12,7 @@ const LinkChip = ({
   locale,
   scroll,
   shallow,
+  underline,
   ...rest
 }: Props) => {
   return (
@@ -23,6 +24,7 @@ const LinkChip = ({
         locale={locale}
         scroll={scroll}
         shallow={shallow}
+        underline={underline}
       >
         {children}
       </Link>
