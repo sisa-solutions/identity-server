@@ -14,6 +14,8 @@
     "fake-db": "turbo run dev --filter=@sisa/fake-api",
     "dev:identity": "turbo run dev --filter=@sisa/identity",
     "build:identity": "turbo run build --filter=@sisa/identity --no-daemon",
+    "dev:email": "turbo run dev --filter=@sisa/email-templates",
+    "build:email": "turbo run build --filter=@sisa/email-templates --no-daemon",
     "release:identity": "turbo build --filter=@sisa/identity^... && changeset publish",
     "dev": "turbo run dev",
     "build": "turbo run build --no-daemon",
