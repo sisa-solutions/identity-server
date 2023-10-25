@@ -16,7 +16,7 @@ export type SelectOption<T extends string | number> = {
   label: string;
 };
 
-export type SelectionInputProps<
+export type SelectInputProps<
   T extends string | number,
   O extends SelectOption<T>,
 > = SelectProps<O> & {
@@ -28,7 +28,7 @@ export type SelectionInputProps<
   options: O[];
 };
 
-const SelectionInput = forwardRef(
+const SelectInput = forwardRef(
   <T extends string | number, O extends SelectOption<T>>(
     {
       label,
@@ -42,7 +42,7 @@ const SelectionInput = forwardRef(
       sx,
       options,
       ...inputProps
-    }: SelectionInputProps<T, O>,
+    }: SelectInputProps<T, O>,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     return (
@@ -77,10 +77,10 @@ const SelectionInput = forwardRef(
   }
 );
 
-SelectionInput.displayName = 'SelectionInput';
+SelectInput.displayName = 'SelectInput';
 
-export default SelectionInput as <T extends string | number, O extends SelectOption<T>>(
-  props: SelectionInputProps<T, O> & {
+export default SelectInput as <T extends string | number, O extends SelectOption<T>>(
+  props: SelectInputProps<T, O> & {
     ref?: Ref<HTMLDivElement>;
   }
 ) => ReactElement;

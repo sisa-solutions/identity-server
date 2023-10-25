@@ -1,8 +1,8 @@
 import { type Control, Controller, type FieldPath, type FieldValues } from 'react-hook-form';
 
-import SelectInput, { type SelectionInputProps, type SelectOption } from '../selection-input';
+import SelectInput, { type SelectInputProps, type SelectOption } from '../select-input';
 
-type SelectionFieldProps<
+type SelectFieldProps<
   T extends string | number,
   O extends SelectOption<T>,
   TFieldValues extends FieldValues = FieldValues,
@@ -10,9 +10,9 @@ type SelectionFieldProps<
 > = {
   name: TName;
   control: Control<TFieldValues>;
-} & SelectionInputProps<T, O>;
+} & SelectInputProps<T, O>;
 
-const SelectionField = <
+const SelectField = <
   T extends string | number,
   O extends SelectOption<T>,
   TFieldValues extends FieldValues = FieldValues,
@@ -20,7 +20,7 @@ const SelectionField = <
   name,
   control,
   ...rest
-}: SelectionFieldProps<T, O, TFieldValues>) => {
+}: SelectFieldProps<T, O, TFieldValues>) => {
   return (
     <Controller
       name={name}
@@ -40,4 +40,4 @@ const SelectionField = <
   );
 };
 
-export default SelectionField;
+export default SelectField;
