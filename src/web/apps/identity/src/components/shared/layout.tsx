@@ -5,6 +5,7 @@ import { Card, CardContent, Stack, Typography } from '@mui/joy';
 
 import bgLogin from '../../../public/images/bg-login.svg';
 import logo from '../../../public/images/logo.png';
+import { Link } from '@sisa/next';
 
 interface Props {
   children: ReactNode;
@@ -48,32 +49,46 @@ const Layout = ({ children }: Props) => {
         }}
       >
         <Stack direction="column" gap={4}>
-          <Stack direction="row" gap={2} justifyContent="center" alignItems="center">
-            <Box
-              width="4rem"
-              height="4rem"
-              className="animate-blink, animate-spin"
-              sx={{
-                backgroundImage: `url('${logo.src}')`,
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: 'contain',
-                backgroundPosition: '6%',
-              }}
-            />
-            <Typography level="h1" color="primary">Sisa Identity</Typography>
-          </Stack>
+          <Link
+            href="/"
+            underline="none"
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            <Stack direction="row" gap={2} alignItems="center">
+              <Box
+                width="5rem"
+                height="5rem"
+                className="animate-blink, animate-spin"
+                sx={{
+                  backgroundImage: `url('${logo.src}')`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'contain',
+                  backgroundPosition: '6%',
+                }}
+              />
+              <Typography level="h1" color="primary">
+                Sisa Identity
+              </Typography>
+            </Stack>
+          </Link>
+
           <Card
-            variant="outlined"
+            variant="plain"
             color="primary"
             sx={{
+              boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.25)',
               '--Card-padding': {
                 xs: '1.5rem',
                 sm: '2rem',
               },
-              minWidth: {
+              width: {
                 xs: '360px',
-                sm: '480px',
+                md: '440px',
               },
+              opacity: 0.95,
             }}
           >
             <CardContent>{children}</CardContent>

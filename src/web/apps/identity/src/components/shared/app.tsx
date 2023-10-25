@@ -17,6 +17,8 @@ import { i18n } from 'i18n';
 
 import ThemeProvider from 'themes/theme-provider';
 
+import Layout from './layout';
+
 type Props = {
   children: ReactNode;
 };
@@ -45,7 +47,7 @@ const App = (props: Props) => {
                 errorRetryCount: 3,
               }}
             >
-              {props.children}
+              <Layout>{props.children}</Layout>
             </SWRConfig>
           </ThemeProvider>
         </I18nProvider>

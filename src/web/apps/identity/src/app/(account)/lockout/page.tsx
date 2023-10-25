@@ -1,17 +1,26 @@
-import Box from '@mui/joy/Box';
+import Card from '@mui/joy/Card';
+import Stack from '@mui/joy/Stack';
+import Typography from '@mui/joy/Typography';
 
-const LoginPage = () => {
+const LockoutPage = () => {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        height: '100dvh',
-        width: '100dvw',
-      }}
-    >
-      Login Here
-    </Box>
+    <Stack direction="column" gap={2}>
+      <Stack
+        direction="column"
+        gap={1}
+        sx={{
+          mb: 2,
+        }}
+      >
+        <Typography level="h3" color="primary">
+          Lockout
+        </Typography>
+        <Card variant="soft">
+          <Typography level="body-sm">{`Your account has been locked out.`}</Typography>
+        </Card>
+      </Stack>
+    </Stack>
   );
 };
 
-export default LoginPage;
+export default LockoutPage;

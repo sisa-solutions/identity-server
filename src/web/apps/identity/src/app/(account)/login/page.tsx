@@ -1,24 +1,56 @@
 'use client';
 
-import { Button, Checkbox, Stack, Typography, Divider, ButtonGroup } from '@mui/joy';
+import Button from '@mui/joy/Button';
+import Card from '@mui/joy/Card';
+import Checkbox from '@mui/joy/Checkbox';
+import Stack from '@mui/joy/Stack';
+import Typography from '@mui/joy/Typography';
+import Divider from '@mui/joy/Divider';
+import ButtonGroup from '@mui/joy/ButtonGroup';
 
-import { FormActions, FormContainer, TextField, useForm } from '@sisa/form';
+import { GithubIcon, LogInIcon, TwitterIcon } from 'lucide-react';
+
+import {
+  FormActions,
+  FormContainer,
+  PasswordField,
+  TextField,
+  useForm,
+  yup,
+  yupResolver,
+} from '@sisa/form';
 import { Link } from '@sisa/next';
-import { GithubIcon, MailIcon, TwitterIcon } from 'lucide-react';
-
-interface FormValues {
-  username: string;
-  password: string;
-  rememberMe: boolean;
-}
+import { GoogleIcon } from '@sisa/icons';
+import { Tooltip } from '@mui/joy';
 
 const LoginPage = () => {
+  const validationSchema = yup.object({
+    username: yup.string().required().min(6).max(50).label('Email or Username'),
+    password: yup
+      .string()
+      .required()
+      .min(8)
+      .max(20)
+      .label('Password')
+      .test(
+        'password',
+        'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character.',
+        (value) => {
+          return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/.test(value);
+        }
+      ),
+    rememberMe: yup.boolean().label('Remember me'),
+  });
+
+  type FormValues = yup.InferType<typeof validationSchema>;
+
   const { control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       username: '',
       password: '',
       rememberMe: false,
     },
+    resolver: yupResolver(validationSchema),
     reValidateMode: 'onBlur',
   });
 
@@ -35,27 +67,20 @@ const LoginPage = () => {
           mb: 2,
         }}
       >
-        <Typography level="h2" color="primary">
+        <Typography level="h3" color="primary">
           Login
         </Typography>
-        <Divider
-          sx={{
-            '--Divider-childPosition': '0%',
-            '--Divider-thickness': '1px',
-            '--Divider-lineColor': 'var(--joy-palette-warning-outlinedBorder)',
-            alignItems: 'baseline',
-          }}
-        >
-          <Typography level="title-md">{`Let's get you logged in.`}</Typography>
-        </Divider>
+        <Card variant="soft">
+          <Typography level="body-sm">{`Let's get you logged in.`}</Typography>
+        </Card>
       </Stack>
 
       <FormContainer orientation="vertical">
-        <TextField control={control} name="username" label="Username" required />
-        <TextField
+        <TextField control={control} name="username" label="Email or Username" required />
+        <PasswordField
           control={control}
           helperMessage={
-            <Link href="/forgot-password" color="primary" underline="always">
+            <Link href="/forgot-password" color="primary" underline="hover">
               Forgot password?
             </Link>
           }
@@ -71,13 +96,20 @@ const LoginPage = () => {
         />
         <Checkbox label="Remember me" name="rememberMe" />
         <FormActions display="flex" flex={1} mt={2}>
-          <Button type="submit" variant="solid" color="primary" sx={{ flex: 1 }} onClick={onSubmit}>
+          <Button
+            type="submit"
+            variant="solid"
+            color="primary"
+            startDecorator={<LogInIcon />}
+            sx={{ flex: 1 }}
+            onClick={onSubmit}
+          >
             Login
           </Button>
         </FormActions>
       </FormContainer>
 
-      <Divider>or</Divider>
+      <Divider>or continue with</Divider>
 
       <ButtonGroup
         orientation="horizontal"
@@ -87,24 +119,30 @@ const LoginPage = () => {
             flex: 1,
           },
         }}
+        variant="outlined"
+        color="primary"
       >
-        <Button>
-          <MailIcon />
-        </Button>
-        <Button>
-          <GithubIcon />
-        </Button>
+        <Tooltip title="Google">
+          <Button>
+            <GoogleIcon />
+          </Button>
+        </Tooltip>
+        <Tooltip title="Google">
+          <Button>
+            <GithubIcon />
+          </Button>
+        </Tooltip>
         <Button>
           <TwitterIcon />
         </Button>
       </ButtonGroup>
 
-      <Typography level="body-md" textAlign="right" mt={2}>
+      {/* <Typography level="body-sm" textAlign="right" mt={2}>
         {`Don't have an account? `}
         <Link href="/register" color="primary" underline="always">
           Register here
         </Link>
-      </Typography>
+      </Typography> */}
     </Stack>
   );
 };

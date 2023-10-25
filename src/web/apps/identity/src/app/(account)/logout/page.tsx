@@ -1,17 +1,34 @@
-import Box from '@mui/joy/Box';
+import Button from '@mui/joy/Button';
+import Stack from '@mui/joy/Stack';
+import Typography from '@mui/joy/Typography';
+import { LogOutIcon } from 'lucide-react';
 
-const LoginPage = () => {
+const LogoutPage = () => {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        height: '100dvh',
-        width: '100dvw',
-      }}
-    >
-      Login Here
-    </Box>
+    <Stack direction="column" gap={2}>
+      <Stack
+        direction="column"
+        gap={1}
+        sx={{
+          mb: 2,
+        }}
+      >
+        <Typography level="h3" color="primary">
+          Logout
+        </Typography>
+        <Typography level="body-sm">{`Do you want to logout?`}</Typography>
+      </Stack>
+      <Button
+        type="submit"
+        variant="solid"
+        color="warning"
+        startDecorator={<LogOutIcon />}
+        sx={{ flex: 1 }}
+      >
+        Logout
+      </Button>
+    </Stack>
   );
 };
 
-export default LoginPage;
+export default LogoutPage;

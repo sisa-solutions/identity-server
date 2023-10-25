@@ -2,9 +2,7 @@ import Card from '@mui/joy/Card';
 import Stack from '@mui/joy/Stack';
 import Typography from '@mui/joy/Typography';
 
-import { AlertTriangleIcon } from 'lucide-react';
-
-const AccessDeniedPage = () => {
+const ErrorPage = () => {
   return (
     <Stack direction="column" gap={2}>
       <Stack
@@ -14,15 +12,15 @@ const AccessDeniedPage = () => {
           mb: 2,
         }}
       >
-        <Typography level="h3" color="warning" startDecorator={<AlertTriangleIcon />}>
-          Access denied
+        <Typography level="h3" color="danger">
+          Error
         </Typography>
         <Card variant="soft">
-          <Typography level="body-sm">{`You don't have access to this resource.`}</Typography>
+          <Typography level="body-sm">Something went wrong. Please try again later.</Typography>
         </Card>
       </Stack>
     </Stack>
   );
 };
 
-export default AccessDeniedPage;
+export default ErrorPage;

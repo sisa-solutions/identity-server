@@ -1,17 +1,23 @@
-import Box from '@mui/joy/Box';
+import Stack from '@mui/joy/Stack';
+import Typography from '@mui/joy/Typography';
 
-const LoginPage = () => {
+const ResetPasswordConfirmationPage = () => {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        height: '100dvh',
-        width: '100dvw',
-      }}
-    >
-      Login Here
-    </Box>
+    <Stack direction="column" gap={2}>
+      <Stack
+        direction="column"
+        gap={1}
+        sx={{
+          mb: 2,
+        }}
+      >
+        <Typography level="h3" color="primary">
+          Reset password confirmation
+        </Typography>
+        <Typography level="body-sm">{`Your password has been reset.`}</Typography>
+      </Stack>
+    </Stack>
   );
 };
 
-export default LoginPage;
+export default ResetPasswordConfirmationPage;

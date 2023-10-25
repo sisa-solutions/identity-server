@@ -1,17 +1,10 @@
-import Box from '@mui/joy/Box';
+import Stack from '@mui/joy/Stack';
+import { LoadingIcon } from '@sisa/components';
 
-const LoginPage = () => {
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        height: '100dvh',
-        width: '100dvw',
-      }}
-    >
-      Login Here
-    </Box>
-  );
+const ExternalLoginPage = () => {
+  return <Stack direction="column" gap={2}>
+    <LoadingIcon />
+  </Stack>;
 };
 
-export default LoginPage;
+export default ExternalLoginPage;
