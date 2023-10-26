@@ -11,7 +11,7 @@ namespace Sisa.Identity.Api.V1.Account.Commands;
 /// <summary>
 /// Represents a request to login.
 /// </summary>
-public record LoginCommand : ICommand<LoginResponse>
+public class LoginCommand : ICommand<RedirectResponse>
 {
     /// <summary>
     /// Gets or sets the username or email address.
@@ -44,7 +44,7 @@ public record LoginCommand : ICommand<LoginResponse>
 public sealed class LoginCommandHandler(
     // SignInManager<User> signInManager,
     ILogger<LoginCommandHandler> logger
-) : ICommandHandler<LoginCommand, LoginResponse>
+) : ICommandHandler<LoginCommand, RedirectResponse>
 {
     /// <summary>
     /// Handles the command.
@@ -53,59 +53,59 @@ public sealed class LoginCommandHandler(
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    public async ValueTask<LoginResponse> HandleAsync(LoginCommand command, CancellationToken cancellationToken = default)
+    public async ValueTask<RedirectResponse> HandleAsync(LoginCommand command, CancellationToken cancellationToken = default)
     {
-        // var returnUrl = !string.IsNullOrEmpty(command.ReturnUrl) ? Uri.UnescapeDataString(command.ReturnUrl) : string.Empty;
+        var returnUrl = !string.IsNullOrEmpty(command.ReturnUrl) ? Uri.UnescapeDataString(command.ReturnUrl) : string.Empty;
 
-        // if (string.IsNullOrEmpty(returnUrl))
-        // {
-        //     logger.LogError("No return URL was specified.");
+        if (string.IsNullOrEmpty(returnUrl))
+        {
+            logger.LogError("No return URL was specified.");
 
-        //     throw new DomainException(StatusCodes.Status400BadRequest, "no_return_url", "Your login attempt was unsuccessful. Please try again from a trusted source.");
-        // }
+            throw new DomainException(StatusCodes.Status400BadRequest, "no_return_url", "Your login attempt was unsuccessful. Please try again from a trusted source.");
+        }
 
-        // LoginResponse loginResponse = new()
-        // {
-        //     RedirectUrl = returnUrl
-        // };
+        RedirectResponse RedirectResponse = new()
+        {
+            RedirectUrl = returnUrl
+        };
 
-        // var loginResult = await signInManager.PasswordSignInAsync(command.Username, command.Password, command.RememberMe, lockoutOnFailure: true);
+        var loginResult = await signInManager.PasswordSignInAsync(command.Username, command.Password, command.RememberMe, lockoutOnFailure: true);
 
-        // if (loginResult.Succeeded)
-        // {
-        //     logger.LogInformation("User logged in.");
+        if (loginResult.Succeeded)
+        {
+            logger.LogInformation("User logged in.");
 
-        //     if (UrlHelper.IsLocalUrl(returnUrl))
-        //     {
-        //         logger.LogInformation("Redirecting to {returnUrl}.", returnUrl);
+            if (UrlHelper.IsLocalUrl(returnUrl))
+            {
+                logger.LogInformation("Redirecting to {returnUrl}.", returnUrl);
 
-        //         return loginResponse;
-        //     }
+                return RedirectResponse;
+            }
 
-        //     logger.LogError("Invalid return URL was specified.");
+            logger.LogError("Invalid return URL was specified.");
 
-        //     await signInManager.SignOutAsync();
+            await signInManager.SignOutAsync();
 
-        //     throw new DomainException(StatusCodes.Status400BadRequest, "invalid_return_url", "You might have clicked on a malicious link - logged out now");
-        // }
+            throw new DomainException(StatusCodes.Status400BadRequest, "invalid_return_url", "You might have clicked on a malicious link - logged out now");
+        }
 
-        // if (loginResult.RequiresTwoFactor)
-        // {
-        //     logger.LogWarning("Two-factor authentication is required.");
+        if (loginResult.RequiresTwoFactor)
+        {
+            logger.LogWarning("Two-factor authentication is required.");
 
-        //     loginResponse.RedirectUrl = $"/login-with-2fa?returnurl={returnUrl}&remember_mne={command.RememberMe}";
+            RedirectResponse.RedirectUrl = $"/login-with-2fa?return_url={returnUrl}&remember_mne={command.RememberMe}";
 
-        //     return loginResponse;
-        // }
+            return RedirectResponse;
+        }
 
-        // if (loginResult.IsLockedOut)
-        // {
-        //     logger.LogWarning("The user account is locked out.");
+        if (loginResult.IsLockedOut)
+        {
+            logger.LogWarning("The user account is locked out.");
 
-        //     loginResponse.RedirectUrl = "/lockout";
+            RedirectResponse.RedirectUrl = "/lockout";
 
-        //     return loginResponse;
-        // }
+            return RedirectResponse;
+        }
 
         logger.LogError("Invalid credentials were specified.");
 

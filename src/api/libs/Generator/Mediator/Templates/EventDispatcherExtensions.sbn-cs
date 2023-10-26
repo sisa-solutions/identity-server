@@ -17,8 +17,8 @@ public static partial class MediatorEventDispatcherExtensions
 {
     #nullable enable
 
-    /// <inheritdoc />
     {{~ for request in requests ~}}
+    /// <inheritdoc />
     public static async Task SendAsync(
         this global::Sisa.Abstractions.IMediator mediator, global::{{ request.request_name }} @event, CancellationToken cancellationToken = default
     )
