@@ -59,8 +59,9 @@ public static class ServiceCollectionExtensions
     {
         services
             .AddOptions()
-            .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
             .AddTransient<IIdentityService, IdentityService>();
+
+        services.AddHttpContextAccessor();
 
         services.AddResponseCaching();
         services.AddResponseCompression();

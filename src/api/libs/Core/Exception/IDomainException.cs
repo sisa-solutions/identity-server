@@ -2,7 +2,7 @@ namespace System;
 
 public interface IDomainException
 {
-    StatusCode StatusCode { get; }
+    int StatusCode { get; }
     string ErrorCode { get; }
     string Message { get; }
 

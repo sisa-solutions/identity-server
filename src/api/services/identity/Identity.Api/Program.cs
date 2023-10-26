@@ -1,44 +1,68 @@
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+
+using Sisa.Extensions;
+
+using Sisa.Identity.Api.V1.Account;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddCommonConfiguration();
+
+builder.Services.AddMediator();
+builder.Services.AddMediatorDependencies();
+
+builder.Services.AddAntiforgery(options =>
+{
+    options.HeaderName = "x-xsrf-token";
+    options.SuppressXFrameOptionsHeader = false;
+    options.Cookie.SameSite = SameSiteMode.Strict;
+    options.Cookie.HttpOnly = true;
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseAntiforgery();
+
+var antiforgery = app.Services.GetRequiredService<IAntiforgery>();
+
+app.Use((context, next) =>
+{
+    var requestPath = context.Request.Path.Value ?? string.Empty;
+    string[] fontendPaths = ["/login"];
+
+    if (fontendPaths.Any(x => requestPath.StartsWith(x, StringComparison.OrdinalIgnoreCase)))
+    {
+        var tokenSet = antiforgery.GetAndStoreTokens(context);
+
+        context.Response.Cookies.Append("x-xsrf-token", tokenSet.RequestToken!,
+            new CookieOptions { HttpOnly = false, SameSite = SameSiteMode.Strict });
+    }
+
+    return next(context);
+});
+
+app.MapAccountEndpoint();
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.MapFallbackToFile("index.html");
+}
+else
+{
+    app.MapWhen(context =>
+        context.Request.Path.Value?.StartsWith("/api") == false &&
+        context.Request.Path.Value?.StartsWith("/connect") == false &&
+        context.Request.Path.Value?.StartsWith("/account") == false,
+
+        builder => builder.UseSpa(configuration =>
+            {
+                configuration.Options.DevServerPort = 10002;
+                configuration.Options.PackageManagerCommand = "yarn";
+                configuration.Options.SourcePath = "../../../../web";
+                configuration.Options.StartupTimeout = TimeSpan.FromSeconds(10);
+                configuration.UseReactDevelopmentServer("dev:identity");
+            }));
 }
 
-app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
-
-app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+await app.RunAsync();

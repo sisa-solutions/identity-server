@@ -12,16 +12,18 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Sisa.Extensions;
 
+/// <inheritdoc />
 public static partial class MediatorQueryDispatcherExtensions
 {
     #nullable enable
 
+    /// <inheritdoc />
     {{~ for request in requests ~}}
     public static async ValueTask<global::{{ request.response_name }}> SendAsync(
         this global::Sisa.Abstractions.IMediator mediator, global::{{ request.request_name }} query, CancellationToken cancellationToken = default
     )
         => await mediator.SendQueryAsync<global::{{ request.request_name }}, global::{{ request.response_name }}>(query, cancellationToken);
-    
+
     {{~ end ~}}
     #nullable restore
 }

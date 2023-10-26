@@ -23,7 +23,16 @@ import { Link } from '@sisa/next';
 import { GoogleIcon } from '@sisa/icons';
 import { Tooltip } from '@mui/joy';
 
+const isClient = typeof window !== 'undefined';
+
 const LoginPage = () => {
+  const xsrfToken = isClient
+    ? document.cookie
+        .split(';')
+        .find((cookie) => cookie.startsWith('x-xsrf-token'))
+        ?.split('=')[1]
+    : '';
+
   const validationSchema = yup.object({
     username: yup.string().required().min(6).max(50).label('Email or Username'),
     password: yup
@@ -44,7 +53,7 @@ const LoginPage = () => {
 
   type FormValues = yup.InferType<typeof validationSchema>;
 
-  const { control, handleSubmit } = useForm<FormValues>({
+  const { control, handleSubmit, register } = useForm<FormValues>({
     defaultValues: {
       username: '',
       password: '',
@@ -54,8 +63,30 @@ const LoginPage = () => {
     reValidateMode: 'onBlur',
   });
 
-  const onSubmit = handleSubmit((data: FormValues) => {
+  const onSubmit = handleSubmit(async (data: FormValues) => {
     console.log(data);
+
+    const body = new URLSearchParams();
+
+    body.append('username', data.username);
+    body.append('password', data.password);
+    body.append('rememberMe', (data.rememberMe ?? false).toString());
+
+    const response = await fetch(`/login?return_url=/connect/authorize`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'x-xsrf-token': xsrfToken ?? '',
+      },
+      redirect: 'follow',
+      body,
+    });
+
+    if (response.redirected) {
+      window.location.href = response.url;
+    }
+
+    console.log(response);
   });
 
   return (
@@ -94,7 +125,7 @@ const LoginPage = () => {
             },
           }}
         />
-        <Checkbox label="Remember me" name="rememberMe" />
+        <Checkbox label="Remember me" {...register('rememberMe')} />
         <FormActions display="flex" flex={1} mt={2}>
           <Button
             type="submit"

@@ -12,16 +12,10 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Sisa.Extensions;
 
-/// <summary>
-/// Extensions for <see cref="IServiceCollection"/>.
-/// </summary>
+/// <inheritdoc />
 public static partial class ServiceCollectionExtensions
 {
-    /// <summary>
-    /// Add the dependencies resolver.
-    /// </summary>
-    /// <param name="services"></param>
-    /// <returns></returns>
+    /// <inheritdoc />
     public static IServiceCollection AddFluentValidation(this IServiceCollection services)
     {
         {{~ for service in scoped_services ~}}

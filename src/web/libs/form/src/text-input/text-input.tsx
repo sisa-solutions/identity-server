@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, type ReactNode } from 'react';
 
 import Box from '@mui/joy/Box';
 import Typography from '@mui/joy/Typography';
@@ -9,9 +9,9 @@ import FormHelperText from '@mui/joy/FormHelperText';
 import Input, { type InputProps } from '@mui/joy/Input';
 
 export type TextInputProps = InputProps & {
-  label?: React.ReactNode;
-  helperMessage?: React.ReactNode;
-  errorMessage?: React.ReactNode;
+  label?: ReactNode;
+  helperMessage?: ReactNode;
+  errorMessage?: ReactNode;
 };
 
 const TextInput = forwardRef<HTMLDivElement, TextInputProps>(

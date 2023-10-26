@@ -12,16 +12,10 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Sisa.Extensions;
 
-/// <summary>
-/// Extensions for <see cref="IServiceCollection"/>.
-/// </summary>
+/// <inheritdoc />
 public static partial class ServiceCollectionExtensions
 {
-    /// <summary>
-    /// Add the dependencies resolver.
-    /// </summary>
-    /// <param name="services"></param>
-    /// <returns></returns>
+    /// <inheritdoc />
     public static IServiceCollection Add{{project_name}}Dependencies(this IServiceCollection services)
     {
         services.AddTransientServices();
@@ -31,11 +25,7 @@ public static partial class ServiceCollectionExtensions
         return services;
     }
 
-    /// <summary>
-    /// Add transient services;
-    /// </summary>
-    /// <param name="services"></param>
-    /// <returns></returns>
+    /// <inheritdoc />
     private static IServiceCollection AddTransientServices(this IServiceCollection services)
     {
         {{~ for service in transient_services ~}}
@@ -53,11 +43,7 @@ public static partial class ServiceCollectionExtensions
         return services;
     }
 
-    /// <summary>
-    /// Add scoped services;
-    /// </summary>
-    /// <param name="services"></param>
-    /// <returns></returns>
+    /// <inheritdoc />
     private static IServiceCollection AddScopedServices(this IServiceCollection services)
     {
         {{~ for service in scoped_services ~}}
@@ -75,11 +61,7 @@ public static partial class ServiceCollectionExtensions
         return services;
     }
 
-    /// <summary>
-    /// Add singleton services;
-    /// </summary>
-    /// <param name="services"></param>
-    /// <returns></returns>
+    /// <inheritdoc />
     private static IServiceCollection AddSingletonServices(this IServiceCollection services)
     {
         {{~ for service in singleton_services ~}}

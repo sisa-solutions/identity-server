@@ -12,10 +12,12 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Sisa.Extensions;
 
+/// <inheritdoc />
 public static partial class ServiceCollectionExtensions
 {
     #nullable enable
 
+    /// <inheritdoc />
     public static IServiceCollection AddMediatorDependencies(this IServiceCollection services)
     {
         services.RegisterQueries();
@@ -25,6 +27,7 @@ public static partial class ServiceCollectionExtensions
         return services;
     }
 
+    /// <inheritdoc />
     private static IServiceCollection RegisterQueries(this IServiceCollection services)
     {
         {{~ for query in queries ~}}
@@ -34,6 +37,7 @@ public static partial class ServiceCollectionExtensions
         return services;
     }
 
+    /// <inheritdoc />
     private static IServiceCollection RegisterCommands(this IServiceCollection services)
     {
         {{~ for command in commands ~}}
@@ -43,6 +47,7 @@ public static partial class ServiceCollectionExtensions
         return services;
     }
 
+    /// <inheritdoc />
     private static IServiceCollection RegisterEvents(this IServiceCollection services)
     {
         {{~ for event in events ~}}
