@@ -44,7 +44,7 @@ app.Use((context, next) =>
 
 app.MapAccountEndpoint();
 
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment())
 {
     app.MapFallbackToFile("index.html");
 }
