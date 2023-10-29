@@ -1,10 +1,6 @@
-namespace Sisa.Identity.Infrastructure.Helpers;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 using Microsoft.AspNetCore.Identity;
+
+namespace Sisa.Identity.Infrastructure.Helpers;
 
 public sealed class PasswordHelper
 {
@@ -22,12 +18,12 @@ public sealed class PasswordHelper
             RequireUppercase = true
         };
 
-        string[] randomChars = new[] {
-                "ABCDEFGHJKLMNOPQRSTUVWXYZ",    // UPPERCASE
-                "abcdefghijkmnopqrstuvwxyz",    // lowercase
-                "0123456789",                   // digits
-                "!@$?_-"                        // non-alphanumeric
-            };
+        string[] randomChars = [
+            "ABCDEFGHJKLMNOPQRSTUVWXYZ",    // UPPERCASE
+            "abcdefghijkmnopqrstuvwxyz",    // lowercase
+            "0123456789",                   // digits
+            "!@$?_-"                        // non-alphanumeric
+        ];
 
         Random rand = new(Environment.TickCount);
         List<char> chars = new();

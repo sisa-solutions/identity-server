@@ -33,7 +33,7 @@ public static class AccountEndpoint
 
             return TypedResults.Ok(response);
         })
-        .Produces<LoginResponse>(StatusCodes.Status200OK);
+        .Produces<RedirectResponse>(StatusCodes.Status200OK);
 
         // group.MapPost("/logout", LogoutAsync);
         // group.MapPost("/register", RegisterAsync);

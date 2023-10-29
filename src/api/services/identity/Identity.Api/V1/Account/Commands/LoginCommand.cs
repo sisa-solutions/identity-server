@@ -42,7 +42,7 @@ public class LoginCommand : ICommand<RedirectResponse>
 /// Represents a command to login.
 /// </summary>
 public sealed class LoginCommandHandler(
-    // SignInManager<User> signInManager,
+    SignInManager<User> signInManager,
     ILogger<LoginCommandHandler> logger
 ) : ICommandHandler<LoginCommand, RedirectResponse>
 {

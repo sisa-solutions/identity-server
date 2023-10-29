@@ -73,6 +73,13 @@ public static class CertificateHelper
         return await Task.WhenAll(createCertTasks);
     }
 
+    public static async Task<X509Certificate2[][]> GetCertificatesFromPathsAsync(params string [] paths)
+    {
+        var certTasks = paths.Select(GetCertificatesFromPathAsync);
+
+        return await Task.WhenAll(certTasks);
+    }
+
     private static X509Certificate2 CreateCertificateFromStream(byte[] certBytes, byte[] keyBytes)
     {
         X509Certificate2 cert = new(certBytes);

@@ -1,4 +1,4 @@
-namespace Sisa.Infrastructure.Settings;
+﻿namespace Sisa.Settings;
 
 public abstract record BaseAppSettings : IAppSettings
 {
@@ -9,11 +9,5 @@ public abstract record BaseAppSettings : IAppSettings
     public string AppInstance { get; init; } = string.Empty;
     public string DistributedCacheInstance { get; init; } = string.Empty;
 
-    public Localization Localization { get; init; } = new();
-}
-
-public record Localization
-{
-    public string DefaultCulture { get; init; } = "en";
-    public string[] SupportedCultures { get; init; } = new string[] { "en" };
+    public LocalizationSettings Localization { get; init; } = new();
 }

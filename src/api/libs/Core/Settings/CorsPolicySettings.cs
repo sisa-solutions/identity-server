@@ -1,6 +1,6 @@
-namespace Sisa.Infrastructure.Settings;
+﻿namespace Sisa.Settings;
 
-public record CorsPolicySettings
+public record class CorsPolicySettings
 {
     public string Origins { get; init; } = default!;
 

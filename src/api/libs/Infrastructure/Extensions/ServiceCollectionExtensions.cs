@@ -1,59 +1,50 @@
 ﻿using System.Globalization;
 
-using Amazon;
-using Amazon.S3;
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Json;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
 using Sisa.Abstractions;
+using Sisa.Constants;
 using Sisa.Infrastructure.Services;
-using Sisa.Infrastructure.Settings;
-
-// using Sisa.Abstractions.DependencyInjection;
-// using Sisa.Abstractions.Services;
-// using Sisa.Services;
 
 namespace Sisa.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    // public static IServiceCollection AddCorsWithoutPolicy(this IServiceCollection services)
-    // {
-    //     services.AddCors(options =>
-    //     {
-    //         options.AddPolicy(ApiConstants.CORS_WITHOUT_POLICY, builder =>
-    //         {
-    //             builder.SetIsOriginAllowed((host) => true)
-    //                 .AllowAnyMethod()
-    //                 .AllowAnyHeader()
-    //                 .AllowCredentials();
-    //         });
-    //     });
+    public static IServiceCollection AddCorsWithoutPolicy(this IServiceCollection services)
+    {
+        services.AddCors(options =>
+        {
+            options.AddPolicy(ApiConstants.CORS_WITHOUT_POLICY, builder =>
+            {
+                builder.SetIsOriginAllowed((host) => true)
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            });
+        });
 
-    //     return services;
-    // }
+        return services;
+    }
 
-    // public static IServiceCollection AddCorsWithPolicy(this IServiceCollection services, params string[] origins)
-    // {
-    //     services.AddCors(options =>
-    //     {
-    //         options.AddPolicy(ApiConstants.CORS_WITH_POLICY, builder =>
-    //         {
-    //             builder.WithOrigins(origins)
-    //                 .SetIsOriginAllowedToAllowWildcardSubdomains()
-    //                 .AllowAnyMethod()
-    //                 .AllowAnyHeader()
-    //                 .AllowCredentials();
-    //         });
-    //     });
+    public static IServiceCollection AddCorsWithPolicy(this IServiceCollection services, params string[] origins)
+    {
+        services.AddCors(options =>
+        {
+            options.AddPolicy(ApiConstants.CORS_WITH_POLICY, builder =>
+            {
+                builder.WithOrigins(origins)
+                    .SetIsOriginAllowedToAllowWildcardSubdomains()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            });
+        });
 
-    //     return services;
-    // }
+        return services;
+    }
 
     public static IServiceCollection AddCommonConfiguration(this IServiceCollection services)
     {
@@ -95,22 +86,36 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddFileStorageService(this IServiceCollection services, AwsSettings settings)
+    public static IServiceCollection AddCustomAntiforgery(this IServiceCollection services)
     {
-        services.AddSingleton(Options.Create(settings));
-
-        services.AddSingleton<IAmazonS3>(_ =>
+        services.AddAntiforgery(options =>
         {
-            return new AmazonS3Client(settings.AccessKey, settings.SecretKey, new AmazonS3Config()
-            {
-                RegionEndpoint = RegionEndpoint.GetBySystemName(settings.Region),
-                ServiceURL = settings.ServiceUrl
-            });
-
+            options.HeaderName = "x-xsrf-token";
+            options.FormFieldName = "xsrfToken";
+            options.SuppressXFrameOptionsHeader = false;
+            options.Cookie.SameSite = SameSiteMode.Strict;
+            options.Cookie.HttpOnly = true;
         });
-
-        services.AddSingleton<IFileStorageService, FileStorageService>();
 
         return services;
     }
+
+    // public static IServiceCollection AddFileStorageService(this IServiceCollection services, AwsSettings settings)
+    // {
+    //     services.AddSingleton(Options.Create(settings));
+
+    //     services.AddSingleton<IAmazonS3>(_ =>
+    //     {
+    //         return new AmazonS3Client(settings.AccessKey, settings.SecretKey, new AmazonS3Config()
+    //         {
+    //             RegionEndpoint = RegionEndpoint.GetBySystemName(settings.Region),
+    //             ServiceURL = settings.ServiceUrl
+    //         });
+
+    //     });
+
+    //     services.AddSingleton<IFileStorageService, FileStorageService>();
+
+    //     return services;
+    // }
 }

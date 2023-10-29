@@ -1,6 +1,6 @@
-namespace Sisa.Infrastructure.Settings;
+﻿namespace Sisa.Settings;
 
-public record CertSettings
+public record class CertSettings
 {
     public string DataProtection { get; init; } = string.Empty;
     public string EncryptingSigning { get; init; } = string.Empty;

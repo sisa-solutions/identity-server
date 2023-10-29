@@ -1,4 +1,4 @@
-namespace Sisa.Infrastructure.Settings;
+﻿namespace Sisa.Settings;
 
 public interface IIdentitySettings
 {
