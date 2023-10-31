@@ -70,7 +70,6 @@ builder.Services
 
 #endregion
 
-
 #region Identity
 
 builder.Services
