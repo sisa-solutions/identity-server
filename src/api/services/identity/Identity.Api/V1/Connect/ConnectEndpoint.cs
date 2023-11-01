@@ -2,6 +2,7 @@
 using Sisa.Extensions;
 
 using Sisa.Identity.Api.V1.Connect.Commands;
+using Sisa.Identity.Api.V1.Connect.Queries;
 
 namespace Sisa.Identity.Api.V1.Connect;
 
@@ -19,12 +20,38 @@ public static class ConnectEndpoint
     {
         var mediator = builder.ServiceProvider.GetRequiredService<IMediator>();
 
-        var group = builder.MapGroup("/api/v1/Connect");
+        var group = builder.MapGroup("/api/v1/connect");
 
-        group.MapMethods("/login", ["GET", "POST"],
-            async ([AsParameters] AuthorizeCommand command, CancellationToken cancellationToken = default) => await mediator.SendAsync(command, cancellationToken));
+        group.MapMethods("/authorize", ["GET", "POST"], async (AuthorizeCommand command, CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(command, cancellationToken)
+        );
 
-        // group.MapPost("/logout", LogoutAsync);
+        group.MapPost("/token", async (ExchangeTokenCommand command, CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(command, cancellationToken)
+        );
+
+        group.MapGet("/consent", async (GetConsentInfoQuery query, CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(query, cancellationToken)
+        );
+
+        group.MapPost("/consent", async (ConfirmConsentCommand command, CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(command, cancellationToken)
+        );
+
+        group.MapGet("/error", async (GetErrorQuery query, CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(query, cancellationToken)
+        );
+
+        group.MapGet("/verify", async (GetVerificationInfoQuery query, CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(query, cancellationToken)
+        );
+
+        group.MapPost("/verify", async (ConfirmVerificationCommand query, CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(query, cancellationToken)
+        );
+
+
+
         // group.MapPost("/register", RegisterAsync);
         // group.MapPost("/confirm-email", ConfirmEmailAsync);
         // group.MapPost("/forgot-password", ForgotPasswordAsync);
