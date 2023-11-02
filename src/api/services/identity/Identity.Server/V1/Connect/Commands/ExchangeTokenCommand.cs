@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
@@ -15,6 +14,7 @@ using Sisa.Extensions;
 using Sisa.Identity.Domain.AggregatesModel.AuthAggregate;
 using Sisa.Identity.Domain.AggregatesModel.UserAggregate;
 using Sisa.Identity.Infrastructure.Helpers;
+using Sisa.Identity.Server.V1.Connect.Queries;
 
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
@@ -36,6 +36,7 @@ public class ExchangeTokenCommandHandler(
     UserManager<User> userManager,
     OpenIddictScopeManager<Scope> scopeManager,
     IHttpContextAccessor httpContextAccessor,
+    IMediator mediator,
     ILogger<AuthorizeCommandHandler> logger) : ICommandHandler<ExchangeTokenCommand, IResult>
 {
     /// <summary>
@@ -78,11 +79,39 @@ public class ExchangeTokenCommandHandler(
 
             if (!result.Succeeded)
             {
+                if (result.RequiresTwoFactor)
+                {
+                    logger.LogWarning("Two-factor authentication is required.");
+
+                    return TypedResults.Forbid(
+                        properties: new AuthenticationProperties(new Dictionary<string, string?>
+                        {
+                            [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidGrant,
+                            [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "Two-factor authentication is required."
+                        })
+                        , authenticationSchemes: [OpenIddictServerAspNetCoreDefaults.AuthenticationScheme]
+                    );
+                }
+
+                if (result.IsLockedOut)
+                {
+                    logger.LogWarning("The user account is locked out.");
+
+                    return TypedResults.Forbid(
+                        properties: new AuthenticationProperties(new Dictionary<string, string?>
+                        {
+                            [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidGrant,
+                            [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "The user account is locked out."
+                        })
+                        , authenticationSchemes: [OpenIddictServerAspNetCoreDefaults.AuthenticationScheme]
+                    );
+                }
+
                 return TypedResults.Forbid(
                     properties: new AuthenticationProperties(new Dictionary<string, string?>
                     {
                         [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidGrant,
-                        [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "The username/password couple is invalid."
+                        [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "Invalid credentials were specified."
                     })
                     , authenticationSchemes: [OpenIddictServerAspNetCoreDefaults.AuthenticationScheme]
                 );
@@ -95,10 +124,15 @@ public class ExchangeTokenCommandHandler(
                 roleType: Claims.Role);
 
             // Add the claims that will be persisted in the tokens.
-            identity.SetClaim(Claims.Subject, await userManager.GetUserIdAsync(user))
-                    .SetClaim(Claims.Email, await userManager.GetEmailAsync(user))
-                    .SetClaim(Claims.Name, await userManager.GetUserNameAsync(user))
-                    .SetClaims(Claims.Role, (await userManager.GetRolesAsync(user)).ToImmutableArray());
+            var userInfo = await mediator.SendAsync(new GetUserInfoQuery(), cancellationToken);
+
+            if (userInfo is not null)
+            {
+                foreach (var item in userInfo)
+                {
+                    identity.SetClaim(item.Key, item.Value.ToString());
+                }
+            }
 
             // Note: in this sample, the granted scopes match the requested scope
             // but you may want to allow the user to uncheck specific scopes.
@@ -149,14 +183,20 @@ public class ExchangeTokenCommandHandler(
             var identity = new ClaimsIdentity(result.Principal?.Claims,
                 authenticationType: TokenValidationParameters.DefaultAuthenticationType,
                 nameType: Claims.Name,
-                roleType: Claims.Role);
+                roleType: Claims.Role
+            );
 
             // Override the user claims present in the principal in case they
             // changed since the authorization code/refresh token was issued.
-            identity.SetClaim(Claims.Subject, await userManager.GetUserIdAsync(user))
-                    .SetClaim(Claims.Email, await userManager.GetEmailAsync(user))
-                    .SetClaim(Claims.Name, await userManager.GetUserNameAsync(user))
-                    .SetClaims(Claims.Role, (await userManager.GetRolesAsync(user)).ToImmutableArray());
+            var userInfo = await mediator.SendAsync(new GetUserInfoQuery(), cancellationToken);
+
+            if (userInfo is not null)
+            {
+                foreach (var item in userInfo)
+                {
+                    identity.SetClaim(item.Key, item.Value.ToString());
+                }
+            }
 
             identity.SetDestinations(OpenIddictHelper.GetDestinations);
 

@@ -43,7 +43,6 @@ public static class AccountEndpoint
         // group.MapPost("/change-password", ChangePasswordAsync);
         // group.MapPost("/change-email", ChangeEmailAsync);
         // group.MapPost("/resend-email-confirmation", ResendEmailConfirmationAsync);
-
         return group;
     }
 }

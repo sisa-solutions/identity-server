@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
@@ -16,6 +15,7 @@ using Sisa.Extensions;
 using Sisa.Identity.Domain.AggregatesModel.AuthAggregate;
 using Sisa.Identity.Domain.AggregatesModel.UserAggregate;
 using Sisa.Identity.Infrastructure.Helpers;
+using Sisa.Identity.Server.V1.Connect.Queries;
 
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
@@ -42,6 +42,7 @@ public class ConfirmConsentCommandHandler(
     OpenIddictAuthorizationManager<Authorization> authorizationManager,
     OpenIddictScopeManager<Scope> scopeManager,
     IHttpContextAccessor httpContextAccessor,
+    IMediator mediator,
     ILogger<AuthorizeCommandHandler> logger
 ) : ICommandHandler<ConfirmConsentCommand, IResult>
 {
@@ -116,10 +117,15 @@ public class ConfirmConsentCommandHandler(
             roleType: Claims.Role);
 
         // Add the claims that will be persisted in the tokens.
-        identity.SetClaim(Claims.Subject, await userManager.GetUserIdAsync(user))
-                .SetClaim(Claims.Email, await userManager.GetEmailAsync(user))
-                .SetClaim(Claims.Name, await userManager.GetUserNameAsync(user))
-                .SetClaims(Claims.Role, (await userManager.GetRolesAsync(user)).ToImmutableArray());
+        var userInfo = await mediator.SendAsync(new GetUserInfoQuery(), cancellationToken);
+
+        if (userInfo is not null)
+        {
+            foreach (var item in userInfo)
+            {
+                identity.SetClaim(item.Key, item.Value.ToString());
+            }
+        }
 
         // Note: in this sample, the granted scopes match the requested scope
         // but you may want to allow the user to uncheck specific scopes.

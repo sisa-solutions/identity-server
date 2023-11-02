@@ -1,8 +1,14 @@
-﻿using Sisa.Abstractions;
+﻿using Microsoft.AspNetCore.Authentication;
+
+using OpenIddict.Server.AspNetCore;
+
+using Sisa.Abstractions;
 using Sisa.Extensions;
 
 using Sisa.Identity.Server.V1.Connect.Commands;
 using Sisa.Identity.Server.V1.Connect.Queries;
+
+using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace Sisa.Identity.Server.V1.Connect;
 
@@ -50,6 +56,25 @@ public static class ConnectEndpoint
             await mediator.SendAsync(query, cancellationToken)
         );
 
+        group.MapPost("/userinfo", async (GetUserInfoQuery command, CancellationToken cancellationToken = default) =>
+        {
+            var response = await mediator.SendAsync(command, cancellationToken);
+
+            if (response is null)
+            {
+                return Results.Challenge(
+                    properties: new AuthenticationProperties(new Dictionary<string, string?>
+                    {
+                        [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidToken,
+                        [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =
+                            "The specified access token is bound to an account that no longer exists."
+                    })
+                    , authenticationSchemes: [OpenIddictServerAspNetCoreDefaults.AuthenticationScheme]
+                );
+            }
+
+            return TypedResults.Ok(response);
+        });
 
 
         // group.MapPost("/register", RegisterAsync);

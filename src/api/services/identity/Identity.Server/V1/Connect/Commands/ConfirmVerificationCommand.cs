@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
@@ -19,6 +18,7 @@ using Sisa.Identity.Domain.AggregatesModel.UserAggregate;
 using Sisa.Identity.Infrastructure.Helpers;
 
 using static OpenIddict.Abstractions.OpenIddictConstants;
+using Sisa.Identity.Server.V1.Connect.Queries;
 
 namespace Sisa.Identity.Server;
 
@@ -41,6 +41,7 @@ public class ConfirmVerificationCommandHandler(
     UserManager<User> userManager,
     OpenIddictScopeManager<Scope> scopeManager,
     IHttpContextAccessor httpContextAccessor,
+    IMediator mediator,
     ILogger<ConfirmVerificationCommandHandler> logger
 ) : ICommandHandler<ConfirmVerificationCommand, IResult>
 {
@@ -90,16 +91,21 @@ public class ConfirmVerificationCommandHandler(
                 roleType: Claims.Role);
 
             // Add the claims that will be persisted in the tokens.
-            identity.SetClaim(Claims.Subject, await userManager.GetUserIdAsync(user))
-                    .SetClaim(Claims.Email, await userManager.GetEmailAsync(user))
-                    .SetClaim(Claims.Name, await userManager.GetUserNameAsync(user))
-                    .SetClaims(Claims.Role, (await userManager.GetRolesAsync(user)).ToImmutableArray());
+            var userInfo = await mediator.SendAsync(new GetUserInfoQuery(), cancellationToken);
+
+            if (userInfo is not null)
+            {
+                foreach (var item in userInfo)
+                {
+                    identity.SetClaim(item.Key, item.Value.ToString());
+                }
+            }
 
             // Note: in this sample, the granted scopes match the requested scope
             // but you may want to allow the user to uncheck specific scopes.
             // For that, simply restrict the list of scopes before calling SetScopes.
             identity.SetScopes(result.Principal.GetScopes());
-            identity.SetResources(await scopeManager.ListResourcesAsync(identity.GetScopes()).ToListAsync());
+            identity.SetResources(await scopeManager.ListResourcesAsync(identity.GetScopes(), cancellationToken).ToListAsync());
             identity.SetDestinations(OpenIddictHelper.GetDestinations);
 
             var properties = new AuthenticationProperties
