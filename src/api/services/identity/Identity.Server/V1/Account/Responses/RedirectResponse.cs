@@ -1,4 +1,4 @@
-﻿namespace Sisa.Identity.Api.V1.Account.Responses;
+﻿namespace Sisa.Identity.Server.V1.Account.Responses;
 
 /// <summary>
 /// Represents a command to Redirect.

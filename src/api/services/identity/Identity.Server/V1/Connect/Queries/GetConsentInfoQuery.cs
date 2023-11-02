@@ -5,10 +5,10 @@ using OpenIddict.Core;
 
 using Sisa.Abstractions;
 using Sisa.Extensions;
-using Sisa.Identity.Api.V1.Connect.Commands;
+using Sisa.Identity.Server.V1.Connect.Commands;
 using Sisa.Identity.Domain.AggregatesModel.AuthAggregate;
 
-namespace Sisa.Identity.Api.V1.Connect.Queries;
+namespace Sisa.Identity.Server.V1.Connect.Queries;
 
 /// <summary>
 /// Represents the query to get the consent.

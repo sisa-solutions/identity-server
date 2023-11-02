@@ -13,14 +13,14 @@ using OpenIddict.Server.AspNetCore;
 
 using Sisa.Abstractions;
 using Sisa.Extensions;
-using Sisa.Identity.Api.V1.Connect.Responses;
+using Sisa.Identity.Server.V1.Connect.Responses;
 using Sisa.Identity.Domain.AggregatesModel.AuthAggregate;
 using Sisa.Identity.Domain.AggregatesModel.UserAggregate;
 using Sisa.Identity.Infrastructure.Helpers;
 
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
-namespace Sisa.Identity.Api;
+namespace Sisa.Identity.Server;
 
 /// <summary>
 /// Represents the command to confirm the verification.

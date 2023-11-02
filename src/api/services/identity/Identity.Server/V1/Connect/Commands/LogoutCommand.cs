@@ -8,7 +8,7 @@ using OpenIddict.Server.AspNetCore;
 using Sisa.Abstractions;
 using Sisa.Identity.Domain.AggregatesModel.UserAggregate;
 
-namespace Sisa.Identity.Api.V1.Connect.Commands;
+namespace Sisa.Identity.Server.V1.Connect.Commands;
 
 /// <summary>
 /// Command to logout a user

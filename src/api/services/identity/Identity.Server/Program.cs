@@ -9,7 +9,7 @@ using Npgsql;
 using Sisa.Constants;
 using Sisa.Extensions;
 using Sisa.Helpers;
-using Sisa.Identity.Api.V1.Account;
+using Sisa.Identity.Server.V1.Account;
 using Sisa.Identity.Data;
 using Sisa.Identity.Domain.AggregatesModel.AuthAggregate;
 using Sisa.Identity.Domain.AggregatesModel.RoleAggregate;
@@ -319,13 +319,14 @@ else
         context.Request.Path.Value?.StartsWith("/account") == false,
 
         builder => builder.UseSpa(configuration =>
-            {
-                configuration.Options.DevServerPort = 10002;
-                configuration.Options.PackageManagerCommand = "yarn";
-                configuration.Options.SourcePath = "../../../../web";
-                configuration.Options.StartupTimeout = TimeSpan.FromSeconds(10);
-                configuration.UseReactDevelopmentServer("dev:identity");
-            }));
+        {
+            configuration.Options.DevServerPort = 10002;
+            configuration.Options.PackageManagerCommand = "yarn";
+            configuration.Options.SourcePath = "../../../../web";
+            configuration.Options.StartupTimeout = TimeSpan.FromSeconds(10);
+            configuration.UseReactDevelopmentServer("dev:identity");
+        })
+    );
 }
 
 await app.RunAsync();

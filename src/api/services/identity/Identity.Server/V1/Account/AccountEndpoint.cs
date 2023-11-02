@@ -1,10 +1,10 @@
 using Sisa.Abstractions;
 using Sisa.Extensions;
 
-using Sisa.Identity.Api.V1.Account.Commands;
-using Sisa.Identity.Api.V1.Account.Responses;
+using Sisa.Identity.Server.V1.Account.Commands;
+using Sisa.Identity.Server.V1.Account.Responses;
 
-namespace Sisa.Identity.Api.V1.Account;
+namespace Sisa.Identity.Server.V1.Account;
 
 /// <summary>
 /// Represents the account endpoint.

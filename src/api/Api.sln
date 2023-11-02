@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{62
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "identity", "identity", "{137A8617-7EEE-4E73-883A-DCF3EEF740EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Api", "services\identity\Identity.Api\Identity.Api.csproj", "{09548BD4-0553-4898-A1A0-FDCE6B97CF61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Server", "services\identity\Identity.Server\Identity.Server.csproj", "{09548BD4-0553-4898-A1A0-FDCE6B97CF61}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Data", "services\identity\Identity.Data\Identity.Data.csproj", "{41E5E6A1-4D8F-4FE3-BB5C-F4F92D9BD972}"
 EndProject

@@ -1,10 +1,10 @@
 ﻿using Sisa.Abstractions;
 using Sisa.Extensions;
 
-using Sisa.Identity.Api.V1.Connect.Commands;
-using Sisa.Identity.Api.V1.Connect.Queries;
+using Sisa.Identity.Server.V1.Connect.Commands;
+using Sisa.Identity.Server.V1.Connect.Queries;
 
-namespace Sisa.Identity.Api.V1.Connect;
+namespace Sisa.Identity.Server.V1.Connect;
 
 /// <summary>
 /// Represents the Connect endpoint.

@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 using Sisa.Abstractions;
 using Sisa.Helpers;
-using Sisa.Identity.Api.V1.Account.Responses;
+using Sisa.Identity.Server.V1.Account.Responses;
 using Sisa.Identity.Domain.AggregatesModel.UserAggregate;
 
-namespace Sisa.Identity.Api.V1.Account.Commands;
+namespace Sisa.Identity.Server.V1.Account.Commands;
 
 /// <summary>
 /// Represents a request to login.

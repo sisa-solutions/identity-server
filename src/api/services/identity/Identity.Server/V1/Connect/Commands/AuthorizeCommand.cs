@@ -20,7 +20,7 @@ using Sisa.Identity.Infrastructure.Helpers;
 
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
-namespace Sisa.Identity.Api.V1.Connect.Commands;
+namespace Sisa.Identity.Server.V1.Connect.Commands;
 
 /// <summary>
 /// Authorize command.

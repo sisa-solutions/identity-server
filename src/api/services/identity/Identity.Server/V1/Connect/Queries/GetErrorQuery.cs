@@ -3,10 +3,10 @@
 using OpenIddict.Abstractions;
 
 using Sisa.Abstractions;
-using Sisa.Identity.Api.V1.Connect.Commands;
-using Sisa.Identity.Api.V1.Connect.Responses;
+using Sisa.Identity.Server.V1.Connect.Commands;
+using Sisa.Identity.Server.V1.Connect.Responses;
 
-namespace Sisa.Identity.Api.V1.Connect.Queries;
+namespace Sisa.Identity.Server.V1.Connect.Queries;
 
 /// <summary>
 /// Represents the query to get the consent.
