@@ -12,7 +12,7 @@
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/joy": "5.0.0-beta.12",
+    "@mui/joy": "5.0.0-beta.13",
     "@sisa/components": "workspace:*",
     "@sisa/form": "workspace:*",
     "@sisa/hooks": "workspace:*",
@@ -36,7 +36,7 @@
     "@sisa/next-config": "workspace:*",
     "@sisa/tsconfig": "workspace:*",
     "@types/node": "^20.8.10",
-    "@types/react": "^18.2.33",
+    "@types/react": "^18.2.34",
     "@types/react-dom": "^18.2.14",
     "eslint": "^8.52.0",
     "typescript": "^5.2.2"

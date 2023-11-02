@@ -28,7 +28,7 @@
     "@sisa/eslint-config": "workspace:*",
     "@sisa/tsconfig": "workspace:*",
     "@types/quill": "^2.0.13",
-    "@types/react": "^18.2.33",
+    "@types/react": "^18.2.34",
     "@types/react-dom": "^18.2.14",
     "eslint": "^8.52.0",
     "react": "^18.2.0",
