@@ -64,7 +64,7 @@ public sealed class LoginCommandHandler(
             throw new DomainException(StatusCodes.Status400BadRequest, "no_return_url", "Your login attempt was unsuccessful. Please try again from a trusted source.");
         }
 
-        RedirectResponse RedirectResponse = new()
+        RedirectResponse redirectResponse = new()
         {
             RedirectUrl = returnUrl
         };
@@ -79,7 +79,7 @@ public sealed class LoginCommandHandler(
             {
                 logger.LogInformation("Redirecting to {returnUrl}.", returnUrl);
 
-                return RedirectResponse;
+                return redirectResponse;
             }
 
             logger.LogError("Invalid return URL was specified.");
@@ -93,18 +93,18 @@ public sealed class LoginCommandHandler(
         {
             logger.LogWarning("Two-factor authentication is required.");
 
-            RedirectResponse.RedirectUrl = $"/login-with-2fa?return_url={returnUrl}&remember_mne={command.RememberMe}";
+            redirectResponse.RedirectUrl = $"/login-with-2fa?return_url={returnUrl}&remember_mne={command.RememberMe}";
 
-            return RedirectResponse;
+            return redirectResponse;
         }
 
         if (loginResult.IsLockedOut)
         {
             logger.LogWarning("The user account is locked out.");
 
-            RedirectResponse.RedirectUrl = "/lockout";
+            redirectResponse.RedirectUrl = "/lockout";
 
-            return RedirectResponse;
+            return redirectResponse;
         }
 
         logger.LogError("Invalid credentials were specified.");

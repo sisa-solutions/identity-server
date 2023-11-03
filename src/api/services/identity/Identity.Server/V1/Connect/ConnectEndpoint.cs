@@ -26,33 +26,33 @@ public static class ConnectEndpoint
     {
         var mediator = builder.ServiceProvider.GetRequiredService<IMediator>();
 
-        var group = builder.MapGroup("/api/v1/connect");
+        var group = builder.MapGroup("/connect");
 
-        group.MapMethods("/authorize", ["GET", "POST"], async (AuthorizeCommand command, CancellationToken cancellationToken = default) =>
+        group.MapMethods("/authorize", ["GET", "POST"], async (CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(new AuthorizeCommand(), cancellationToken)
+        );
+
+        group.MapPost("/token", async (CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(new ExchangeTokenCommand(), cancellationToken)
+        );
+
+        group.MapGet("/consent", async (CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(new GetConsentInfoQuery(), cancellationToken)
+        );
+
+        group.MapPost("/consent", async ([AsParameters]ConfirmConsentCommand command, CancellationToken cancellationToken = default) =>
             await mediator.SendAsync(command, cancellationToken)
         );
 
-        group.MapPost("/token", async (ExchangeTokenCommand command, CancellationToken cancellationToken = default) =>
-            await mediator.SendAsync(command, cancellationToken)
+        group.MapGet("/error", async (CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(new GetErrorQuery(), cancellationToken)
         );
 
-        group.MapGet("/consent", async (GetConsentInfoQuery query, CancellationToken cancellationToken = default) =>
-            await mediator.SendAsync(query, cancellationToken)
+        group.MapGet("/verify", async (CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(new GetVerificationInfoQuery(), cancellationToken)
         );
 
-        group.MapPost("/consent", async (ConfirmConsentCommand command, CancellationToken cancellationToken = default) =>
-            await mediator.SendAsync(command, cancellationToken)
-        );
-
-        group.MapGet("/error", async (GetErrorQuery query, CancellationToken cancellationToken = default) =>
-            await mediator.SendAsync(query, cancellationToken)
-        );
-
-        group.MapGet("/verify", async (GetVerificationInfoQuery query, CancellationToken cancellationToken = default) =>
-            await mediator.SendAsync(query, cancellationToken)
-        );
-
-        group.MapPost("/verify", async (ConfirmVerificationCommand query, CancellationToken cancellationToken = default) =>
+        group.MapPost("/verify", async ([AsParameters]ConfirmVerificationCommand query, CancellationToken cancellationToken = default) =>
             await mediator.SendAsync(query, cancellationToken)
         );
 

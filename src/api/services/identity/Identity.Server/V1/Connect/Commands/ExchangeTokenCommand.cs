@@ -121,7 +121,8 @@ public class ExchangeTokenCommandHandler(
             var identity = new ClaimsIdentity(
                 authenticationType: TokenValidationParameters.DefaultAuthenticationType,
                 nameType: Claims.Name,
-                roleType: Claims.Role);
+                roleType: Claims.Role
+            );
 
             // Add the claims that will be persisted in the tokens.
             var userInfo = await mediator.SendAsync(new GetUserInfoQuery(), cancellationToken);
