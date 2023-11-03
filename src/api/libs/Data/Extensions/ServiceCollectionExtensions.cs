@@ -33,7 +33,7 @@ public static class ServiceCollectionExtensions
     }
 
     public static IServiceCollection AddPooledDbContext<TDbContext, TDbContextFactory>(
-        this IServiceCollection services, Action<DbContextOptionsBuilder> optionsAction, int poolSize = 1024)
+        this IServiceCollection services, Action<IServiceProvider, DbContextOptionsBuilder> optionsAction, int poolSize = 1024)
         where TDbContext : DbContext, IUnitOfWork
         where TDbContextFactory : class, IDbContextFactory<TDbContext>
     {

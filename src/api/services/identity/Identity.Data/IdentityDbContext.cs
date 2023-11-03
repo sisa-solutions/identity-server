@@ -30,7 +30,6 @@ public class IdentityDbContext : IdentityDbContext<User, Role, Guid,
     public DbSet<Scope> Scopes => Set<Scope>();
     public DbSet<Token> Tokens => Set<Token>();
 
-
     public IdentityDbContext(DbContextOptions<IdentityDbContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

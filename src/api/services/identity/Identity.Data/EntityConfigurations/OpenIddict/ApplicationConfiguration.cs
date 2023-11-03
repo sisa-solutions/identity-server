@@ -13,6 +13,14 @@ public class ApplicationConfiguration : EntityConfiguration<Application>
         builder.HasIndex(x => x.ClientId)
             .IsUnique();
 
+        builder.Property(t => t.ApplicationType)
+            .HasMaxLength(50)
+            .HasDefaultValueSql("''");
+
+        builder.Property(t => t.ClientType)
+            .HasMaxLength(50)
+            .HasDefaultValueSql("''");
+
         builder.Property(t => t.ClientId)
             .IsRequired()
             .HasMaxLength(100);
@@ -48,18 +56,16 @@ public class ApplicationConfiguration : EntityConfiguration<Application>
         builder.Property(t => t.Properties)
             .HasDefaultValueSql("'{}'");
 
+        builder.Property(t => t.Settings)
+            .HasDefaultValueSql("'{}'");
+
+        builder.Property(t => t.JsonWebKeySet)
+            .HasDefaultValueSql("'{}'");
+
         builder.Property(t => t.RedirectUris)
             .HasDefaultValueSql("'[]'");
 
         builder.Property(t => t.PostLogoutRedirectUris)
             .HasDefaultValueSql("'[]'");
-
-        builder.Property(t => t.ClientType)
-            .HasMaxLength(50)
-            .HasDefaultValueSql("''");
-
-        builder.Property(t => t.ApplicationType)
-            .HasMaxLength(50)
-            .HasDefaultValueSql("''");
     }
 }
