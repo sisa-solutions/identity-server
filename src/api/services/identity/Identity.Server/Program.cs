@@ -16,7 +16,7 @@ using Sisa.Identity.Domain.AggregatesModel.RoleAggregate;
 using Sisa.Identity.Domain.AggregatesModel.UserAggregate;
 using Sisa.Identity.Settings;
 
-using static OpenIddict.Abstractions.OpenIddictConstants;
+using Sisa.Identity.Server.V1.Connect;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
@@ -65,8 +65,9 @@ dataSourceBuilder.EnableArrays();
 var dataSource = dataSourceBuilder.Build();
 
 builder.Services
-    .AddDbContextFactory<IdentityDbContext>((serviceProvider, options)
-        => options.UseDatabase(serviceProvider, dataSource));
+    .AddPooledDbContext<IdentityDbContext, IdentityDbContextFactory>((serviceProvider, options)
+        => options.UseDatabase(serviceProvider, dataSource)
+    ).AddDataProtectionContext<IdentityDbContext>(appSettings.AppInstance, 90, dpCerts);
 
 #endregion
 
@@ -104,13 +105,14 @@ builder.Services
     .AddEntityFrameworkStores<IdentityDbContext>()
     .AddDefaultTokenProviders();
 
-builder.Services.Configure<CookieAuthenticationOptions>(options =>
-{
-    options.ReturnUrlParameter = "return_url";
-    options.LoginPath = "/login";
-    options.LogoutPath = "/logout";
-    options.AccessDeniedPath = "/access-denied";
-});
+builder.Services
+    .Configure<CookieAuthenticationOptions>(options =>
+    {
+        options.ReturnUrlParameter = "return_url";
+        options.LoginPath = "/login";
+        options.LogoutPath = "/logout";
+        options.AccessDeniedPath = "/access-denied";
+    });
 
 builder.Services
     .AddAuthorization()
@@ -124,14 +126,14 @@ builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie();
 
-builder.Services.AddSession(options =>
+builder.Services
+    .AddSession(options =>
     {
         options.IdleTimeout = TimeSpan.FromMinutes(2);
         options.Cookie.HttpOnly = true;
         options.Cookie.SameSite = SameSiteMode.None;
         options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     });
-
 
 #endregion
 
@@ -170,13 +172,13 @@ builder.Services.AddOpenIddict()
             .UseReferenceRefreshTokens();
 
         // Expose all the supported scopes in the discovery document.
-        options.RegisterScopes(
-            Scopes.OpenId,
-            Scopes.Email,
-            Scopes.Phone,
-            Scopes.Profile,
-            Scopes.OfflineAccess
-        );
+        // options.RegisterScopes(
+        //     Scopes.OpenId,
+        //     Scopes.Email,
+        //     Scopes.Phone,
+        //     Scopes.Profile,
+        //     Scopes.OfflineAccess
+        // );
 
         // Register the signing and encryption credentials used to protect
         // sensitive data like the state tokens produced by OpenIddict.
@@ -294,8 +296,9 @@ app.Use((context, next) =>
     return next(context);
 });
 
-app.UseRouting();
 app.UseCorsWithPolicy();
+
+app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -306,6 +309,7 @@ app.UseResponseCaching();
 app.UseResponseCompression();
 
 app.MapAccountEndpoint();
+app.MapConnectEndpoint();
 
 if (!app.Environment.IsDevelopment())
 {
