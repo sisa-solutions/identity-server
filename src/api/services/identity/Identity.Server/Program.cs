@@ -32,6 +32,7 @@ builder.Services.AddCommonConfiguration()
 builder.Services.AddMediator();
 builder.Services.AddMediatorDependencies();
 builder.Services.AddDataDependencies();
+builder.Services.AddInfrastructureDependencies();
 
 if (!builder.Environment.IsProduction())
 {

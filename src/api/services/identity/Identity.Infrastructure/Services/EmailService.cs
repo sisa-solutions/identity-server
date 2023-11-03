@@ -5,9 +5,7 @@ using Sisa.Identity.Infrastructure.EmailTemplates;
 namespace Sisa.Identity.Infrastructure.Services;
 
 [SingletonService]
-public class EmailService(
-    IEmailSenderService emailSender
-    ) : IEmailService
+public class EmailService(IEmailSenderService emailSender) : IEmailService
 {
     public async Task<bool> SendRegistrationConfirmAsync(string to, RegistrationConfirmModel model, CancellationToken cancellationToken = default)
     {

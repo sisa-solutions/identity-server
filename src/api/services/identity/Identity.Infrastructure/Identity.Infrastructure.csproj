@@ -3,11 +3,15 @@
   <PropertyGroup>
     <AssemblyName>Sisa.Identity.Infrastructure</AssemblyName>
     <RootNamespace>Sisa.Identity.Infrastructure</RootNamespace>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Identity.Domain\Identity.Domain.csproj" />
     <ProjectReference Include="..\..\..\libs\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\libs\Generator\Generator.csproj"
+      OutputItemType="Analyzer"
+      ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup>

@@ -213,6 +213,7 @@ public sealed class DependenciesResolverExtensionsGenerator : IIncrementalGenera
                 .Select(c => new RenderModel()
                 {
                     InterfaceName = c.InterfaceName,
+                    ImplementName = c.ImplementName,
                     Key = c.Key
                 }).ToList()
         };

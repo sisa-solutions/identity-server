@@ -49,12 +49,12 @@ public static partial class ServiceCollectionExtensions
         {{~ for service in scoped_services ~}}
         {{~ if service.interface_name ~}}
         {{~ if service.key ~}}
-        services.TryAddTransient<global::{{ service.interface_name }}, global::{{ service.implement_name }}>({{ service.key }});
+        services.TryAddScoped<global::{{ service.interface_name }}, global::{{ service.implement_name }}>({{ service.key }});
         {{~ else ~}}
-        services.TryAddTransient<global::{{ service.interface_name }}, global::{{ service.implement_name }}>();
+        services.TryAddScoped<global::{{ service.interface_name }}, global::{{ service.implement_name }}>();
         {{~ end ~}}
         {{~ else ~}}
-        services.TryAddTransient<global::{{ service.implement_name }}>();
+        services.TryAddScoped<global::{{ service.implement_name }}>();
         {{~ end ~}}
         {{~ end ~}}
 
@@ -67,12 +67,12 @@ public static partial class ServiceCollectionExtensions
         {{~ for service in singleton_services ~}}
         {{~ if service.interface_name ~}}
         {{~ if service.key ~}}
-        services.TryAddTransient<global::{{ service.interface_name }}, global::{{ service.implement_name }}>({{ service.key }});
+        services.TryAddSingleton<global::{{ service.interface_name }}, global::{{ service.implement_name }}>({{ service.key }});
         {{~ else ~}}
-        services.TryAddTransient<global::{{ service.interface_name }}, global::{{ service.implement_name }}>();
+        services.TryAddSingleton<global::{{ service.interface_name }}, global::{{ service.implement_name }}>();
         {{~ end ~}}
         {{~ else ~}}
-        services.TryAddTransient<global::{{ service.implement_name }}>();
+        services.TryAddSingleton<global::{{ service.implement_name }}>();
         {{~ end ~}}
         {{~ end ~}}
 
