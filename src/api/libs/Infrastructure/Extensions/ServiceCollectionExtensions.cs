@@ -1,5 +1,7 @@
 ﻿using System.Globalization;
 
+using FluentEmail.Core;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
@@ -8,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Sisa.Abstractions;
 using Sisa.Constants;
 using Sisa.Infrastructure.Services;
+using Sisa.Settings;
 
 namespace Sisa.Extensions;
 
@@ -118,4 +121,38 @@ public static class ServiceCollectionExtensions
 
     //     return services;
     // }
+
+    public static IServiceCollection AddSmtpEmailSender(this IServiceCollection services, SmptSettings smptSettings, EmailSender emailSender)
+    {
+        if (string.IsNullOrEmpty(emailSender.Email))
+        {
+            throw new ArgumentNullException(nameof(emailSender.Email));
+        }
+
+        if (string.IsNullOrEmpty(smptSettings.Host))
+        {
+            throw new ArgumentNullException(nameof(smptSettings.Host));
+        }
+
+        if (string.IsNullOrEmpty(smptSettings.Username))
+        {
+            throw new ArgumentNullException(nameof(smptSettings.Username));
+        }
+
+        if (string.IsNullOrEmpty(smptSettings.Password))
+        {
+            throw new ArgumentNullException(nameof(smptSettings.Password));
+        }
+
+        services
+            .AddFluentEmail(emailSender.Email, emailSender.Name)
+            .AddRazorRenderer()
+            .AddSmtpSender(
+                smptSettings.Host,
+                smptSettings.Port,
+                smptSettings.Username,
+                smptSettings.Password);
+
+        return services;
+    }
 }

@@ -105,14 +105,14 @@ builder.Services
     .AddEntityFrameworkStores<IdentityDbContext>()
     .AddDefaultTokenProviders();
 
-builder.Services
-    .Configure<CookieAuthenticationOptions>(options =>
-    {
-        options.ReturnUrlParameter = "return_url";
-        options.LoginPath = "/login";
-        options.LogoutPath = "/logout";
-        options.AccessDeniedPath = "/access-denied";
-    });
+// builder.Services
+//     .Configure<CookieAuthenticationOptions>(options =>
+//     {
+//         options.ReturnUrlParameter = "return_url";
+//         options.LoginPath = "/login";
+//         options.LogoutPath = "/logout";
+//         options.AccessDeniedPath = "/access-denied";
+//     });
 
 builder.Services
     .AddAuthorization()
@@ -122,6 +122,9 @@ builder.Services
         options.LoginPath = "/login";
         options.LogoutPath = "/logout";
         options.AccessDeniedPath = "/access-denied";
+
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.SlidingExpiration = true;
     })
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie();
@@ -246,6 +249,8 @@ builder.Services.AddOpenIddict()
 #endregion
 
 builder.Services.AddCustomAntiforgery();
+
+builder.Services.AddSmtpEmailSender(appSettings.Email.Smtp, appSettings.Email.Sender);
 
 var app = builder.Build();
 

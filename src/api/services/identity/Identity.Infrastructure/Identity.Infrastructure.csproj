@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="EmailTemplates\*.cshtml" />
     <EmbeddedResource Include="EmailTemplates\*.cshtml" />
   </ItemGroup>
 

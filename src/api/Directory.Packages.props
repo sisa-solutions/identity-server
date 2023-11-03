@@ -86,6 +86,13 @@
     <PackageVersion Include="coverlet.msbuild" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageVersion Include="MimeKit" Version="4.2.0" />
+    <PackageVersion Include="MailKit" Version="4.2.0" />
+    <PackageVersion Include="FluentEmail.Razor" Version="3.0.2" />
+    <PackageVersion Include="FluentEmail.Smtp" Version="3.0.2" />
+  </ItemGroup>
+
   <!-- Template Engine -->
   <ItemGroup>
     <PackageVersion Include="Scriban" Version="5.9.0" />

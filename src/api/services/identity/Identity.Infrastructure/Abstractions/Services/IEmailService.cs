@@ -4,8 +4,8 @@ namespace Sisa.Identity.Infrastructure.Abstractions;
 
 public interface IEmailService
 {
-    Task<bool> SendConfirmEmailAsync(
-        string to, ConfirmEmailModel model, CancellationToken cancellationToken = default);
+    Task<bool> SendRegistrationConfirmAsync(
+        string to, RegistrationConfirmModel model, CancellationToken cancellationToken = default);
 
     Task<bool> SendResetPasswordAsync(
         string to, ResetPasswordModel model, CancellationToken cancellationToken = default);

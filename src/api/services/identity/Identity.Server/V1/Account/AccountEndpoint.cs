@@ -35,11 +35,28 @@ public static class AccountEndpoint
         })
         .Produces<RedirectResponse>(StatusCodes.Status200OK);
 
+        group.MapPost("/login-with-2fa", async ([AsParameters] LoginWith2faCommand command, CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(command, cancellationToken));
+
+        group.MapPost("/login-with-recovery-code", async ([AsParameters] LoginWithRecoveryCodeCommand command, CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(command, cancellationToken));
+
         // group.MapPost("/logout", LogoutAsync);
-        // group.MapPost("/register", RegisterAsync);
-        // group.MapPost("/confirm-email", ConfirmEmailAsync);
-        // group.MapPost("/forgot-password", ForgotPasswordAsync);
-        // group.MapPost("/reset-password", ResetPasswordAsync);
+        group.MapPost("/register", async ([AsParameters] RegisterCommand command, CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(command, cancellationToken)
+        );
+
+        group.MapPost("/confirm-email", async ([AsParameters] ConfirmEmailCommand command, CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(command, cancellationToken)
+        );
+
+        group.MapPost("/forgot-password", async ([AsParameters] ForgotPasswordCommand command, CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(command, cancellationToken)
+        );
+
+        group.MapPost("/reset-password", async ([AsParameters] ResetPasswordCommand command, CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(command, cancellationToken));
+
         // group.MapPost("/change-password", ChangePasswordAsync);
         // group.MapPost("/change-email", ChangeEmailAsync);
         // group.MapPost("/resend-email-confirmation", ResendEmailConfirmationAsync);
