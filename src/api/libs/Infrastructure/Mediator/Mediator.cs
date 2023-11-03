@@ -18,7 +18,8 @@ public partial class Mediator(IServiceProvider serviceProvider) : IMediator
     /// <returns></returns>
     public async Task SendCommandAsync<TCommand>(TCommand command, CancellationToken cancellationToken = default) where TCommand : ICommand
     {
-        var dispatcher = serviceProvider.GetRequiredService<ICommandDispatcher>();
+        using var scope = serviceProvider.CreateScope();
+        var dispatcher = scope.ServiceProvider.GetRequiredService<ICommandDispatcher>();
 
         await dispatcher.DispatchAsync(command, cancellationToken);
     }
@@ -34,7 +35,8 @@ public partial class Mediator(IServiceProvider serviceProvider) : IMediator
     public async ValueTask<TResponse> SendCommandAsync<TCommand, TResponse>(TCommand command, CancellationToken cancellationToken)
         where TCommand : ICommand<TResponse>
     {
-        var dispatcher = serviceProvider.GetRequiredService<ICommandDispatcher>();
+        using var scope = serviceProvider.CreateScope();
+        var dispatcher = scope.ServiceProvider.GetRequiredService<ICommandDispatcher>();
 
         return await dispatcher.DispatchAsync<TCommand, TResponse>(command, cancellationToken);
     }
@@ -50,7 +52,8 @@ public partial class Mediator(IServiceProvider serviceProvider) : IMediator
     public async ValueTask<TResponse> SendQueryAsync<TQuery, TResponse>(TQuery query, CancellationToken cancellationToken = default)
         where TQuery : IQuery<TResponse>
     {
-        var dispatcher = serviceProvider.GetRequiredService<IQueryDispatcher>();
+        using var scope = serviceProvider.CreateScope();
+        var dispatcher = scope.ServiceProvider.GetRequiredService<IQueryDispatcher>();
 
         return await dispatcher.DispatchAsync<TQuery, TResponse>(query, cancellationToken);
     }
@@ -65,7 +68,8 @@ public partial class Mediator(IServiceProvider serviceProvider) : IMediator
     /// <exception cref="NotImplementedException"></exception>
     public async Task PublishEventAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : IEvent
     {
-        var publisher = serviceProvider.GetRequiredService<IEventPublisher>();
+        using var scope = serviceProvider.CreateScope();
+        var publisher = scope.ServiceProvider.GetRequiredService<IEventPublisher>();
 
         await publisher.PublishAsync(@event, cancellationToken);
     }
