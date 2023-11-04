@@ -55,7 +55,7 @@ public class RegisterCommand : ICommand<IResult>
 }
 
 internal class RegisterCommandHandler(
-    IDataProtector dataProtector,
+    IDataProtectionProvider dataProtectorProvider,
     UserManager<User> userManager,
     SignInManager<User> signInManager,
     IEmailService emailService,
@@ -63,6 +63,8 @@ internal class RegisterCommandHandler(
     ILogger<RegisterCommand> logger
 ) : ICommandHandler<RegisterCommand, IResult>
 {
+    private readonly IDataProtector _dataProtector = dataProtectorProvider.CreateProtector("Sisa.Identity.Server");
+
     public async ValueTask<IResult> HandleAsync(
         RegisterCommand command,
         CancellationToken cancellationToken = default)
@@ -97,7 +99,7 @@ internal class RegisterCommandHandler(
                 logger.LogInformation("User created a new account with email.");
 
                 var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                var tokenBytes = dataProtector.Protect(Encoding.UTF8.GetBytes($"CONFIRM_EMAIL:{user.Id}:{code}"));
+                var tokenBytes = _dataProtector.Protect(Encoding.UTF8.GetBytes($"CONFIRM_EMAIL:{user.Id}:{code}"));
                 var token = WebEncoders.Base64UrlEncode(tokenBytes);
                 var confirmEmailUrl = $"{appSettingsAccessor.Value.Identity.Authority}/confirm-email?return_url={command.ReturnUrl}&token={token}";
 

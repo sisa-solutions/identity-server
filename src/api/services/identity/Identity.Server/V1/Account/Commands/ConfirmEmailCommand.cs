@@ -24,11 +24,13 @@ public class ConfirmEmailCommand : ICommand<IResult>
 /// Represents a command to login.
 /// </summary>
 public sealed class ConfirmEmailCommandHandler(
-    IDataProtector dataProtector,
+    IDataProtectionProvider dataProtectorProvider,
     UserManager<User> userManager,
     ILogger<ConfirmEmailCommand> logger
 ) : ICommandHandler<ConfirmEmailCommand, IResult>
 {
+    private readonly IDataProtector _dataProtector = dataProtectorProvider.CreateProtector("Sisa.Identity.Server");
+
     /// <summary>
     /// Handles the command.
     /// </summary>
@@ -42,8 +44,8 @@ public sealed class ConfirmEmailCommandHandler(
 
         logger.LogInformation("Confirm email for user");
 
-        var totokenBytes = dataProtector.Unprotect(WebEncoders.Base64UrlDecode(command.Token));
-        var token = Encoding.UTF8.GetString(totokenBytes);
+        var tokenBytes = _dataProtector.Unprotect(WebEncoders.Base64UrlDecode(command.Token));
+        var token = Encoding.UTF8.GetString(tokenBytes);
 
         var tokenParts = token.Split(':');
 

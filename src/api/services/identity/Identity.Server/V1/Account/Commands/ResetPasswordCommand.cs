@@ -29,16 +29,18 @@ public class ResetPasswordCommand : ICommand<IResult>
 
 /// <inheritdoc/>
 public sealed class ResetPasswordCommandHandler(
-    IDataProtector dataProtector,
+    IDataProtectionProvider dataProtectorProvider,
     UserManager<User> userManager,
     ILogger<ResetPasswordCommandHandler> logger
 ) : ICommandHandler<ResetPasswordCommand, IResult>
 {
+    private readonly IDataProtector _dataProtector = dataProtectorProvider.CreateProtector("Sisa.Identity.Server");
+
     /// <inheritdoc/>
     public async ValueTask<IResult> HandleAsync(ResetPasswordCommand command, CancellationToken cancellationToken = default)
     {
-        var totokenBytes = dataProtector.Unprotect(WebEncoders.Base64UrlDecode(command.Token));
-        var token = Encoding.UTF8.GetString(totokenBytes);
+        var tokenBytes = _dataProtector.Unprotect(WebEncoders.Base64UrlDecode(command.Token));
+        var token = Encoding.UTF8.GetString(tokenBytes);
 
         var tokenParts = token.Split(':');
 

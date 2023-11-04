@@ -32,17 +32,19 @@ public class ResendEmailConfirmationCommand : ICommand<IResult>
     public bool IsPreferredPhone => !IsPreferredEmail;
 
     /// <inheritdoc/>
-    public Dictionary<string, string> Ext { get; set; } = new();
+    public Dictionary<string, string> Ext { get; set; } = [];
 }
 
 internal class ResendEmailConfirmationCommandHandler(
-    IDataProtector dataProtector,
+    IDataProtectionProvider dataProtectorProvider,
     UserManager<User> userManager,
     IEmailService emailService,
     IOptions<AppSettings> appSettingsAccessor,
     ILogger<ResendEmailConfirmationCommand> logger
 ) : ICommandHandler<ResendEmailConfirmationCommand, IResult>
 {
+    private readonly IDataProtector _dataProtector = dataProtectorProvider.CreateProtector("Sisa.Identity.Server");
+
     public async ValueTask<IResult> HandleAsync(
         ResendEmailConfirmationCommand command,
         CancellationToken cancellationToken = default)
@@ -51,7 +53,7 @@ internal class ResendEmailConfirmationCommandHandler(
         {
             var user = await userManager.FindByEmailAsync(command.UserName);
 
-            if(user == null)
+            if (user == null)
             {
                 logger.LogError("User not found");
 
@@ -59,7 +61,7 @@ internal class ResendEmailConfirmationCommandHandler(
             }
 
             var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-            var tokenBytes = dataProtector.Protect(Encoding.UTF8.GetBytes($"CONFIRM_EMAIL:{user.Id}:{code}"));
+            var tokenBytes = _dataProtector.Protect(Encoding.UTF8.GetBytes($"CONFIRM_EMAIL:{user.Id}:{code}"));
             var token = WebEncoders.Base64UrlEncode(tokenBytes);
             var confirmEmailUrl = $"{appSettingsAccessor.Value.Identity.Authority}/confirm-email?return_url={command.ReturnUrl}&token={token}";
 

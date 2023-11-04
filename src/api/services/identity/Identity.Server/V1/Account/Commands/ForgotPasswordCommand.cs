@@ -38,13 +38,15 @@ public class ForgotPasswordCommand : ICommand<IResult>
 /// Represents a command to login.
 /// </summary>
 internal class ForgotPasswordCommandHandler(
-    IDataProtector dataProtector,
+    IDataProtectionProvider dataProtectorProvider,
     UserManager<User> userManager,
     IEmailService emailService,
     IOptions<AppSettings> appSettingsAccessor,
     ILogger<ForgotPasswordCommand> logger
 ) : ICommandHandler<ForgotPasswordCommand, IResult>
 {
+    private readonly IDataProtector _dataProtector = dataProtectorProvider.CreateProtector("Sisa.Identity.Server");
+
     public async ValueTask<IResult> HandleAsync(
         ForgotPasswordCommand command,
         CancellationToken cancellationToken = default
@@ -87,7 +89,7 @@ internal class ForgotPasswordCommandHandler(
             }
 
             var code = await userManager.GeneratePasswordResetTokenAsync(user);
-            var tokenBytes = dataProtector.Protect(Encoding.UTF8.GetBytes($"RESET_PASSWORD:{user.Id}:{code}"));
+            var tokenBytes = _dataProtector.Protect(Encoding.UTF8.GetBytes($"RESET_PASSWORD:{user.Id}:{code}"));
             var token = WebEncoders.Base64UrlEncode(tokenBytes);
             var resetPasswordUrl = $"{appSettingsAccessor.Value.Identity.Authority}/reset-password?return_url={command.ReturnUrl}&token={token}&source=email-link";
 
