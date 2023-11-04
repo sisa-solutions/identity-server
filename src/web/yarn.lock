@@ -819,9 +819,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/eslintrc@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "@eslint/eslintrc@npm:2.1.2"
+"@eslint/eslintrc@npm:^2.1.3":
+  version: 2.1.3
+  resolution: "@eslint/eslintrc@npm:2.1.3"
   dependencies:
     ajv: "npm:^6.12.4"
     debug: "npm:^4.3.2"
@@ -832,14 +832,14 @@ __metadata:
     js-yaml: "npm:^4.1.0"
     minimatch: "npm:^3.1.2"
     strip-json-comments: "npm:^3.1.1"
-  checksum: 00efdc3797e6f05518060522b7788e5f5aff02f13facbd0c83b176c3dee86554023283a5f68542df379c5137685d2d29745c87f62bf2406a1d38d95471f44ce6
+  checksum: f4103f4346126292eb15581c5a1d12bef03410fd3719dedbdb92e1f7031d46a5a2d60de8566790445d5d4b70b75ba050876799a11f5fff8265a91ee3fa77dab0
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:8.52.0":
-  version: 8.52.0
-  resolution: "@eslint/js@npm:8.52.0"
-  checksum: cdcf8f9b54994fe1a5dc086c714a75dca5fe5899f9b362986abd12b3b5bec9c9755f7608e663ce072edd3fa3910cc752afef8d149fda0288a477652b65865a1c
+"@eslint/js@npm:8.53.0":
+  version: 8.53.0
+  resolution: "@eslint/js@npm:8.53.0"
+  checksum: d29f6c207b2f6dc4ef174d16a3c07b0d3a17ca3d805680496ff267edd773e3bac41db4e7dcab622ca1970d892535bd19671e2a756d4eac75e96fd8c8dcdb619b
   languageName: node
   linkType: hard
 
@@ -1809,8 +1809,8 @@ __metadata:
     "@types/react": "npm:^18.2.34"
     "@types/react-dom": "npm:^18.2.14"
     echarts: "npm:^5.4.3"
-    eslint: "npm:^8.52.0"
-    flag-icons: "npm:^6.11.2"
+    eslint: "npm:^8.53.0"
+    flag-icons: "npm:^6.12.0"
     react: "npm:^18.2.0"
     tsup: "npm:^7.2.0"
     typescript: "npm:^5.2.2"
@@ -1866,7 +1866,7 @@ __metadata:
     "@types/quill": "npm:^2.0.13"
     "@types/react": "npm:^18.2.34"
     "@types/react-dom": "npm:^18.2.14"
-    eslint: "npm:^8.52.0"
+    eslint: "npm:^8.53.0"
     imask: "npm:^7.1.3"
     quill: "npm:^1.3.7"
     react: "npm:^18.2.0"
@@ -1894,7 +1894,7 @@ __metadata:
   dependencies:
     "@sisa/eslint-config": "workspace:*"
     "@sisa/tsconfig": "workspace:*"
-    eslint: "npm:^8.52.0"
+    eslint: "npm:^8.53.0"
     react: "npm:^18.2.0"
     tsup: "npm:^7.2.0"
     typescript: "npm:^5.2.2"
@@ -1910,7 +1910,7 @@ __metadata:
     "@sisa/eslint-config": "workspace:*"
     "@sisa/tsconfig": "workspace:*"
     dayjs: "npm:^1.11.10"
-    eslint: "npm:^8.52.0"
+    eslint: "npm:^8.53.0"
     i18next: "npm:^23.6.0"
     i18next-browser-languagedetector: "npm:^7.1.0"
     react: "npm:^18.2.0"
@@ -1928,7 +1928,7 @@ __metadata:
     "@sisa/tsconfig": "workspace:*"
     "@types/react": "npm:^18.2.34"
     "@types/react-dom": "npm:^18.2.14"
-    eslint: "npm:^8.52.0"
+    eslint: "npm:^8.53.0"
     react: "npm:^18.2.0"
     tsup: "npm:^7.2.0"
     typescript: "npm:^5.2.2"
@@ -1962,9 +1962,9 @@ __metadata:
     "@types/react": "npm:^18.2.34"
     "@types/react-dom": "npm:^18.2.14"
     accept-language: "npm:^3.0.18"
-    eslint: "npm:^8.52.0"
+    eslint: "npm:^8.53.0"
     i18next-resources-to-backend: "npm:^1.1.4"
-    lucide-react: "npm:^0.291.0"
+    lucide-react: "npm:^0.292.0"
     mobx: "npm:^6.10.2"
     mobx-react-lite: "npm:^4.0.5"
     next: "npm:^14.0.1"
@@ -1992,7 +1992,7 @@ __metadata:
     "@sisa/tsconfig": "workspace:*"
     "@types/react": "npm:^18.2.34"
     "@types/react-dom": "npm:^18.2.14"
-    eslint: "npm:^8.52.0"
+    eslint: "npm:^8.53.0"
     react: "npm:^18.2.0"
     tsup: "npm:^7.2.0"
     typescript: "npm:^5.2.2"
@@ -2009,7 +2009,7 @@ __metadata:
   dependencies:
     "@sisa/eslint-config": "workspace:*"
     "@sisa/tsconfig": "workspace:*"
-    eslint: "npm:^8.52.0"
+    eslint: "npm:^8.53.0"
     react: "npm:^18.2.0"
     swr: "npm:^2.2.4"
     ts-proto: "npm:^1.163.0"
@@ -2032,7 +2032,7 @@ __metadata:
     "@sisa/tsconfig": "workspace:*"
     "@types/react": "npm:^18.2.34"
     "@types/react-dom": "npm:^18.2.14"
-    eslint: "npm:^8.52.0"
+    eslint: "npm:^8.53.0"
     react: "npm:^18.2.0"
     tsup: "npm:^7.2.0"
     typescript: "npm:^5.2.2"
@@ -2048,7 +2048,7 @@ __metadata:
     "@changesets/cli": "npm:^2.26.2"
     "@sisa/eslint-config": "workspace:*"
     "@turbo/gen": "npm:^1.10.16"
-    eslint: "npm:^8.52.0"
+    eslint: "npm:^8.53.0"
     prettier: "npm:^3.0.3"
     turbo: "npm:^1.10.16"
     typescript: "npm:^5.2.2"
@@ -4605,14 +4605,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.52.0":
-  version: 8.52.0
-  resolution: "eslint@npm:8.52.0"
+"eslint@npm:^8.53.0":
+  version: 8.53.0
+  resolution: "eslint@npm:8.53.0"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.2.0"
     "@eslint-community/regexpp": "npm:^4.6.1"
-    "@eslint/eslintrc": "npm:^2.1.2"
-    "@eslint/js": "npm:8.52.0"
+    "@eslint/eslintrc": "npm:^2.1.3"
+    "@eslint/js": "npm:8.53.0"
     "@humanwhocodes/config-array": "npm:^0.11.13"
     "@humanwhocodes/module-importer": "npm:^1.0.1"
     "@nodelib/fs.walk": "npm:^1.2.8"
@@ -4649,7 +4649,7 @@ __metadata:
     text-table: "npm:^0.2.0"
   bin:
     eslint: bin/eslint.js
-  checksum: 9269b32ccf6e9947d994f871888d5b541da4a8539160ee19d80ecac0c70c51a7d3a7c111a58cf1adf81f093a7c1b5564edefa5c6dbe29b1df9c9f3e30700af30
+  checksum: c5cd0049488c0463dab7d97466767ca5a1d0b3b59d0a223122683dc8039ecea30b27867fb9e38906b4c1ab9d09ece8a802a6c540d8905016f1cc4b4bb27329af
   languageName: node
   linkType: hard
 
@@ -4983,10 +4983,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flag-icons@npm:^6.11.2":
-  version: 6.11.2
-  resolution: "flag-icons@npm:6.11.2"
-  checksum: 154b23544d022b9b1b24954f3282601f0d3699b9a4f803fa853baf258ccc86ec37889fe876098476d54cd5b9cc8e33fe51b22bf826d33dd6c731f654298566d5
+"flag-icons@npm:^6.12.0":
+  version: 6.12.0
+  resolution: "flag-icons@npm:6.12.0"
+  checksum: 690a007a33ad16d3d6c7342670683ad4601c9d4bff9515eb41c4996dc79b6b692278ff738238318400b792dfaf49024c0385d2ca900f46b30b67565ddb6ff490
   languageName: node
   linkType: hard
 
@@ -6784,12 +6784,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^0.291.0":
-  version: 0.291.0
-  resolution: "lucide-react@npm:0.291.0"
+"lucide-react@npm:^0.292.0":
+  version: 0.292.0
+  resolution: "lucide-react@npm:0.292.0"
   peerDependencies:
     react: ^16.5.1 || ^17.0.0 || ^18.0.0
-  checksum: 4a26b884b7da87887faed79275d9e6038bc352c2082fa493dffa1e138c74fc1120742370bd4a3ea0811d258708a993c76dbea79a7af07c1ffd5d785f4688fe14
+  checksum: 6a29a213d6ef27fc23aef54838255f73d64b0f542da0f61cd21d3150a74aee3c366805c9ebdfefe0dfaa8b35bf8af27789d6d43109588c3f322b978cedd81926
   languageName: node
   linkType: hard
 

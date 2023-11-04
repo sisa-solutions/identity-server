@@ -19,14 +19,14 @@
     "@sisa/utils": "workspace:*",
     "@tanstack/react-table": "^8.10.7",
     "echarts": "^5.4.3",
-    "flag-icons": "^6.11.2"
+    "flag-icons": "^6.12.0"
   },
   "devDependencies": {
     "@sisa/eslint-config": "workspace:*",
     "@sisa/tsconfig": "workspace:*",
     "@types/react": "^18.2.34",
     "@types/react-dom": "^18.2.14",
-    "eslint": "^8.52.0",
+    "eslint": "^8.53.0",
     "react": "^18.2.0",
     "tsup": "^7.2.0",
     "typescript": "^5.2.2"

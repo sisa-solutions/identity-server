@@ -23,7 +23,7 @@
     "@sisa/utils": "workspace:*",
     "accept-language": "^3.0.18",
     "i18next-resources-to-backend": "^1.1.4",
-    "lucide-react": "^0.291.0",
+    "lucide-react": "^0.292.0",
     "mobx": "^6.10.2",
     "mobx-react-lite": "^4.0.5",
     "next": "^14.0.1",
@@ -38,7 +38,7 @@
     "@types/node": "^20.8.10",
     "@types/react": "^18.2.34",
     "@types/react-dom": "^18.2.14",
-    "eslint": "^8.52.0",
+    "eslint": "^8.53.0",
     "typescript": "^5.2.2"
   }
 }
