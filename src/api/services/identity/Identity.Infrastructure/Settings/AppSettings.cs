@@ -11,7 +11,7 @@ public record AppSettings : BaseAppSettings
 
 public record EmailSettings
 {
-    public SmptSettings Smtp { get; set; } = new();
+    public SmtpSettings Smtp { get; set; } = new();
     public EmailSender Sender { get; set; } = new();
     public Contact Contact { get; set; } = new();
 }

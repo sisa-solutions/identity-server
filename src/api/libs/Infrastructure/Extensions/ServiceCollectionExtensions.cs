@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 using Sisa.Abstractions;
 using Sisa.Constants;
@@ -122,36 +123,38 @@ public static class ServiceCollectionExtensions
     //     return services;
     // }
 
-    public static IServiceCollection AddSmtpEmailSender(this IServiceCollection services, SmptSettings smptSettings, EmailSender emailSender)
+    public static IServiceCollection AddSmtpEmailSender(this IServiceCollection services, SmtpSettings smtpSettings, EmailSender emailSender)
     {
         if (string.IsNullOrEmpty(emailSender.Email))
         {
             throw new ArgumentNullException(nameof(emailSender.Email));
         }
 
-        if (string.IsNullOrEmpty(smptSettings.Host))
+        if (string.IsNullOrEmpty(smtpSettings.Host))
         {
-            throw new ArgumentNullException(nameof(smptSettings.Host));
+            throw new ArgumentNullException(nameof(smtpSettings.Host));
         }
 
-        if (string.IsNullOrEmpty(smptSettings.Username))
+        if (string.IsNullOrEmpty(smtpSettings.Username))
         {
-            throw new ArgumentNullException(nameof(smptSettings.Username));
+            throw new ArgumentNullException(nameof(smtpSettings.Username));
         }
 
-        if (string.IsNullOrEmpty(smptSettings.Password))
+        if (string.IsNullOrEmpty(smtpSettings.Password))
         {
-            throw new ArgumentNullException(nameof(smptSettings.Password));
+            throw new ArgumentNullException(nameof(smtpSettings.Password));
         }
+
+        services.TryAddSingleton<IEmailSenderService, EmailSenderService>();
 
         services
             .AddFluentEmail(emailSender.Email, emailSender.Name)
             .AddRazorRenderer()
             .AddSmtpSender(
-                smptSettings.Host,
-                smptSettings.Port,
-                smptSettings.Username,
-                smptSettings.Password);
+                smtpSettings.Host,
+                smtpSettings.Port,
+                smtpSettings.Username,
+                smtpSettings.Password);
 
         return services;
     }

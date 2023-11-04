@@ -9,7 +9,7 @@ public record Contact
     public string Address { get; set; } = string.Empty;
 }
 
-public record SmptSettings
+public record SmtpSettings
 {
     public string Host { get; set; } = string.Empty;
     public int Port { get; set; }
