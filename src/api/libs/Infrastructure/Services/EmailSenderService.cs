@@ -27,26 +27,35 @@ public class EmailSenderService : IEmailSenderService
     {
         var assembly = typeof(TModel).Assembly;
 
-        var templatePath = assembly.GetManifestResourceNames()
-            .FirstOrDefault(x => x.EndsWith(templateName));
+        var htmlTemplatePath = assembly.GetManifestResourceNames()
+            .FirstOrDefault(x => x.EndsWith($"{templateName}.cshtml"));
 
-        if (templatePath == null)
+        if (htmlTemplatePath == null)
         {
             _logger.LogError("Template {Template} not found", templateName);
 
             throw new InvalidOperationException($"Template {templateName} not found");
         }
 
+        var txtTemplatePath = assembly.GetManifestResourceNames()
+            .FirstOrDefault(x => x.EndsWith($"{templateName}.txt"));
+
         using var scope = _serviceProvider.CreateScope();
-        var _fluentEmail = scope.ServiceProvider.GetRequiredService<IFluentEmail>();
+        var fluentEmail = scope.ServiceProvider.GetRequiredService<IFluentEmail>();
 
         _logger.LogInformation("Sending email to {To} with subject {Subject}", to, subject);
 
-        var result = await _fluentEmail
+        fluentEmail
             .To(to)
             .Subject(subject)
-            .UsingTemplateFromEmbedded(templatePath, model, assembly)
-            .SendAsync(cancellationToken);
+            .UsingTemplateFromEmbedded(htmlTemplatePath, model, assembly);
+
+        if (txtTemplatePath != null)
+        {
+            fluentEmail.PlaintextAlternativeUsingTemplateFromEmbedded(txtTemplatePath, model, assembly);
+        }
+
+        var result = await fluentEmail.SendAsync(cancellationToken);
 
         if (result.Successful)
         {
@@ -58,47 +67,5 @@ public class EmailSenderService : IEmailSenderService
         }
 
         return result.Successful;
-    }
-
-    public async Task<IDictionary<string, bool>> SendWithEmbeddedTemplateAsync<TModel>(
-        string subject,
-        IDictionary<string, TModel> models,
-        string templateName,
-        CancellationToken cancellationToken = default)
-    {
-        var assembly = typeof(TModel).Assembly;
-
-        var templatePath = assembly.GetManifestResourceNames()
-            .FirstOrDefault(x => x.EndsWith(templateName));
-
-        if (templatePath == null)
-        {
-            _logger.LogError("Template {Template} not found", templateName);
-
-            throw new InvalidOperationException($"Template {templateName} not found");
-        }
-
-        using var scope = _serviceProvider.CreateScope();
-        var _fluentEmailFactory = scope.ServiceProvider.GetRequiredService<IFluentEmailFactory>();
-
-        Func<string, IFluentEmail> getFluentEmail = (to) => _fluentEmailFactory
-            .Create()
-            .To(to)
-            .Subject(subject)
-            .UsingTemplateFromEmbedded(templatePath, models[to], assembly);
-
-        var fluentEmailTasks = models
-            .Select(async x =>
-            {
-                var fluentEmail = getFluentEmail(x.Key);
-
-                var result = await fluentEmail.SendAsync(cancellationToken);
-
-                return new KeyValuePair<string, bool>(x.Key, result.Successful);
-            });
-
-        var results = await Task.WhenAll(fluentEmailTasks);
-
-        return results.ToDictionary(x => x.Key, x => x.Value);
     }
 }

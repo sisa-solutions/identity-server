@@ -1,50 +1,34 @@
-@model Sisa.Identity.Infrastructure.EmailTemplates.ConfirmEmailModel;
+@model Sisa.Identity.Infrastructure.EmailTemplates.RegistrationConfirmModel
 
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<html dir="ltr" lang="en">
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Confirm Email - Sisa Co., Ltd</title>
-    <meta name="description" content="Confirm Email - Sisa Co., Ltd" />
-    <meta name="author" content="Sang Au" />
+  <head></head>
 
-    <meta name="theme-color" content="#000000" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-    <meta property="og:title" content="Confirm Email - Sisa Co., Ltd" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://sisa.io" />
-  </head>
-
-  <body>
-    <div>
-      <p>
-        Dear @Model.FullName,
-      </p>
-      <p>
-        Welcome to @Model.OrgName! Thank you for registering with us.
-        To activate your account and access our services,
-        we need to verify your email address.
-      </p>
-      <p>
-        Please click the button below to confirm your email address:
-      </p>
-      <a href="@Model.ConfirmEmailUrl">Confirm Email</a>
-      <p>
-        If you have trouble confirming your email,
-        please copy and paste the following link into your browser's address bar:
-      </p>
-      <p>@Model.ConfirmEmailUrl</p>
-      <p>
-        Thank you for choosing @Model.OrgName.
-      </p>
-      <br />
-      <p>
-        Best regards,
-        <br />
-        @Model.ContactName
-      </p>
-    </div>
+  <body style="background-color:rgb(255,255,255);margin-top:auto;margin-bottom:auto;margin-left:auto;margin-right:auto;font-family:ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;">
+    <div style="display:none;overflow:hidden;line-height:1px;opacity:0;max-height:0;max-width:0">Welcome to @Model.UserName - please verify your email</div>
+    <table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0" role="presentation" style="max-width:37.5em;box-shadow:0 0 #0000, 0 0 #0000, 0 4px 6px -1px rgb(0,0,0,0.1), 0 2px 4px -2px rgb(0,0,0,0.1);background-color:rgb(255,255,255);border-color:rgb(234,234,234);border-radius:0.375rem;margin-top:40px;margin-bottom:40px;margin-left:auto;margin-right:auto;padding:16px;width:400px">
+      <tbody>
+        <tr style="width:100%">
+          <td>
+            <p style="font-size:14px;line-height:24px;margin:16px 0;color:rgb(0,0,0)">Hello @Model.UserName,</p>
+            <h1 style="color:rgb(0,0,0);font-size:24px;font-weight:400;text-align:center;padding:0px;margin-top:30px;margin-bottom:30px;margin-left:0px;margin-right:0px">Thank you for signing up for @Model.Company.</h1>
+            <p style="font-size:14px;line-height:24px;margin:16px 0;color:rgb(0,0,0)">To get started, please verify your email address by entering this code in our website: <code style="background-color:rgb(229,231,235);border-radius:0.25rem;padding-left:4px;padding-right:4px;padding-top:2px;padding-bottom:2px">@Model.Code</code></p>
+            <p style="font-size:14px;line-height:24px;margin:16px 0;color:rgb(0,0,0)">Or, you can simply click on this link to activate your account: </p>
+            <table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0" role="presentation" style="text-align:center;margin-top:16px;margin-bottom:16px">
+              <tbody>
+                <tr>
+                  <td><a href="@Model.Url" style="background-color:rgb(2,132,199);padding-top:12px;padding-bottom:12px;padding-left:12px;padding-right:12px;border-radius:0.25rem;color:rgb(255,255,255);font-size:12px;font-weight:600;text-decoration-line:none;text-align:center;line-height:100%;text-decoration:none;display:inline-block;max-width:100%;padding:12px 12px 12px 12px" target="_blank"><span><!--[if mso]><i style="letter-spacing: 12px;mso-font-width:-100%;mso-text-raise:18" hidden>&nbsp;</i><![endif]--></span><span style="max-width:100%;display:inline-block;line-height:120%;mso-padding-alt:0px;mso-text-raise:9px">Verify your email</span><span><!--[if mso]><i style="letter-spacing: 12px;mso-font-width:-100%" hidden>&nbsp;</i><![endif]--></span></a></td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="font-size:14px;line-height:24px;margin:16px 0;color:rgb(0,0,0)">If you have trouble clicking on the link, please copy and paste this URL into your browser: <a href="@Model.Url" style="color:rgb(37,99,235);text-decoration:none;text-decoration-line:none" target="_blank">@Model.Url</a></p>
+            <p style="font-size:14px;line-height:24px;margin:16px 0;color:rgb(0,0,0)">----------------<br />Cheers,<br />The @Model.Company team</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </body>
+
 </html>

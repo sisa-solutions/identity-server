@@ -67,8 +67,8 @@ internal class ResendEmailConfirmationCommandHandler(
 
             var confirmEmailModel = new RegistrationConfirmModel(
                 appSettingsAccessor.Value.Email.Contact.Company,
-                appSettingsAccessor.Value.Email.Contact.Name,
                 user.FullName ?? user.Email!,
+                code,
                 confirmEmailUrl
             );
 

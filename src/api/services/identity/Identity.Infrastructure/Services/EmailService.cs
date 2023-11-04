@@ -9,7 +9,7 @@ public class EmailService(IEmailSenderService emailSender) : IEmailService
 {
     public async Task<bool> SendRegistrationConfirmAsync(string to, RegistrationConfirmModel model, CancellationToken cancellationToken = default)
     {
-        var templateName = "RegistrationConfirm.cshtml";
+        var templateName = "RegistrationConfirm";
 
         return await emailSender
             .SendWithEmbeddedTemplateAsync(to, "Confirm Your Email Address to Activate Your Account", model, templateName, cancellationToken);

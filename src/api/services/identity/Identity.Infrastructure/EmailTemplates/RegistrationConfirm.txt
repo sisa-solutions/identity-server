@@ -1,0 +1,18 @@
+Hello @Model.UserName,
+
+
+THANK YOU FOR SIGNING UP FOR @MODEL.COMPANY.
+
+To get started, please verify your email address by entering this code in our
+website: @Model.Code
+
+Or, you can simply click on this link to activate your account:
+
+Verify your email [@Model.Url]
+
+If you have trouble clicking on the link, please copy and paste this URL into
+your browser: @Model.Url [@Model.Url]
+
+----------------
+Cheers,
+The @Model.Company team
