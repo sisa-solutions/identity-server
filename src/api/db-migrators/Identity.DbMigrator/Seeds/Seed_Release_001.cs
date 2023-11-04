@@ -143,6 +143,9 @@ namespace Sisa.Identity.DbMigrator.Seeds
 
                         Permissions.ResponseTypes.Code,
 
+                        Permissions.Prefixes.Scope + Scopes.OpenId,
+                        Permissions.Prefixes.Scope + Scopes.OfflineAccess,
+
                         Permissions.Scopes.Email,
                         Permissions.Scopes.Phone,
                         Permissions.Scopes.Roles,

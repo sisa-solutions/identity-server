@@ -22,6 +22,7 @@ import {
 import { Link } from '@sisa/next';
 import { GoogleIcon } from '@sisa/icons';
 import { Tooltip } from '@mui/joy';
+import { useSearchParams } from 'next/navigation';
 
 const isClient = typeof window !== 'undefined';
 
@@ -32,6 +33,8 @@ const LoginPage = () => {
         .find((cookie) => cookie.startsWith('x-xsrf-token'))
         ?.split('=')[1]
     : '';
+  const searchParams = useSearchParams();
+  const returnUrl = searchParams.get('return_url');
 
   const validationSchema = yup.object({
     username: yup.string().required().min(6).max(50).label('Email or Username'),
@@ -72,18 +75,19 @@ const LoginPage = () => {
     body.append('password', data.password);
     body.append('rememberMe', (data.rememberMe ?? false).toString());
 
-    const response = await fetch(`/login?return_url=/connect/authorize`, {
+    const response = await fetch(`/api/v1/account/login?return_url=${returnUrl}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         'x-xsrf-token': xsrfToken ?? '',
       },
-      redirect: 'follow',
       body,
     });
 
-    if (response.redirected) {
-      window.location.href = response.url;
+    if (response.status === 200) {
+      const data = await response.json();
+
+      window.location.href = data.redirectUrl;
     }
 
     console.log(response);

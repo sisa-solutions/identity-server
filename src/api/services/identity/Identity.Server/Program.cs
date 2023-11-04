@@ -17,6 +17,7 @@ using Sisa.Identity.Domain.AggregatesModel.UserAggregate;
 using Sisa.Identity.Settings;
 
 using Sisa.Identity.Server.V1.Connect;
+using static OpenIddict.Abstractions.OpenIddictConstants;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
@@ -176,13 +177,14 @@ builder.Services.AddOpenIddict()
             .UseReferenceRefreshTokens();
 
         // Expose all the supported scopes in the discovery document.
-        // options.RegisterScopes(
-        //     Scopes.OpenId,
-        //     Scopes.Email,
-        //     Scopes.Phone,
-        //     Scopes.Profile,
-        //     Scopes.OfflineAccess
-        // );
+        options.RegisterScopes(
+            Scopes.OpenId,
+            Scopes.Email,
+            Scopes.Roles,
+            Scopes.Phone,
+            Scopes.Profile,
+            Scopes.OfflineAccess
+        );
 
         // Register the signing and encryption credentials used to protect
         // sensitive data like the state tokens produced by OpenIddict.
@@ -325,8 +327,7 @@ else
 {
     app.MapWhen(context =>
         context.Request.Path.Value?.StartsWith("/api") == false &&
-        context.Request.Path.Value?.StartsWith("/connect") == false &&
-        context.Request.Path.Value?.StartsWith("/account") == false,
+        context.Request.Path.Value?.StartsWith("/connect") == false,
 
         builder => builder.UseSpa(configuration =>
         {

@@ -18,27 +18,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Bit.BlazorUI" />
-    <!-- <PackageReference Include="Bit.CodeAnalyzers">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference> -->
-
-    <!-- <PackageReference Include="Bit.SourceGenerators">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference> -->
-
-    <!-- <Using Include="Bit.BlazorUI" />
-    <Using Include="Microsoft.JSInterop" />
-    <Using Include="Sisa.Identity.Server.Components" /> -->
-  </ItemGroup>
-
   <!-- BEGIN: Libs -->
   <ItemGroup>
-    <ProjectReference Include="..\..\..\libs\Generator\Generator.csproj" OutputItemType="Analyzer"
-      ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\..\..\libs\Generator\Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
   <!-- END: Libs -->
 

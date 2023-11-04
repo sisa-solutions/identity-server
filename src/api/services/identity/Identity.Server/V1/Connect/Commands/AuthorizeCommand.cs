@@ -100,7 +100,7 @@ public class AuthorizeCommandHandler(
 
             parameters.Add(KeyValuePair.Create(Parameters.Prompt, new StringValues(prompt)));
 
-            var returnUrl = $"return_url={httpContext.Request.PathBase}{httpContext.Request.Path}{BuildQueryString(httpContext, request)}";
+            var returnUrl = $"{httpContext.Request.PathBase}{httpContext.Request.Path}{BuildQueryString(httpContext, request)}";
 
             // For applications that want to allow the client to select the external authentication provider
             // that will be used to authenticate the user, the identity_provider parameter can be used for that.
@@ -190,7 +190,10 @@ public class AuthorizeCommandHandler(
                     roleType: Claims.Role);
 
                 // Add the claims that will be persisted in the tokens.
-                var userInfo = await mediator.SendAsync(new GetUserInfoQuery(), cancellationToken);
+                var userInfo = await mediator.SendAsync(new GetUserInfoQuery
+                {
+                    Id = user.Id.ToString()
+                }, cancellationToken);
 
                 if (userInfo is not null)
                 {

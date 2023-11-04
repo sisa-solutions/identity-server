@@ -26,11 +26,6 @@ public static class AccountEndpoint
         {
             var response = await mediator.SendAsync(command, cancellationToken);
 
-            if (!string.IsNullOrEmpty(response.RedirectUrl))
-            {
-                TypedResults.Redirect(response.RedirectUrl);
-            }
-
             return TypedResults.Ok(response);
         })
         .Produces<RedirectResponse>(StatusCodes.Status200OK);

@@ -125,7 +125,10 @@ public class ExchangeTokenCommandHandler(
             );
 
             // Add the claims that will be persisted in the tokens.
-            var userInfo = await mediator.SendAsync(new GetUserInfoQuery(), cancellationToken);
+            var userInfo = await mediator.SendAsync(new GetUserInfoQuery
+            {
+                Id = user.Id.ToString()
+            }, cancellationToken);
 
             if (userInfo is not null)
             {
@@ -189,7 +192,10 @@ public class ExchangeTokenCommandHandler(
 
             // Override the user claims present in the principal in case they
             // changed since the authorization code/refresh token was issued.
-            var userInfo = await mediator.SendAsync(new GetUserInfoQuery(), cancellationToken);
+            var userInfo = await mediator.SendAsync(new GetUserInfoQuery
+            {
+                Id = user.Id.ToString()
+            }, cancellationToken);
 
             if (userInfo is not null)
             {

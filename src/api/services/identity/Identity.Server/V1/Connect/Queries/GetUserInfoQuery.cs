@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 using Microsoft.AspNetCore.Identity;
 
 using OpenIddict.Abstractions;
@@ -15,7 +17,10 @@ namespace Sisa.Identity.Server.V1.Connect.Queries;
 /// </summary>
 public record GetUserInfoQuery : IQuery<IDictionary<string, object>?>
 {
-
+    /// <summary>
+    /// Gets or sets the unique identifier for the user.
+    /// </summary>
+    public string Id { get; set; } = string.Empty;
 }
 
 /// <summary>
@@ -41,9 +46,7 @@ public class GetUserInfoQueryHandler(
         var httpContext = httpContextAccessor.HttpContext
             ?? throw new InvalidOperationException("The HTTP context cannot be retrieved.");
 
-        var userId = httpContext.User.GetClaim(Claims.Subject) ?? string.Empty;
-
-        var user = await userManager.FindByIdAsync(httpContext.User.GetClaim(Claims.Subject) ?? string.Empty);
+        var user = await userManager.FindByIdAsync(query.Id);
 
         if (user is null)
         {
@@ -55,7 +58,7 @@ public class GetUserInfoQueryHandler(
         var claims = new Dictionary<string, object>(StringComparer.Ordinal)
         {
             // Note: the "sub" claim is a mandatory claim and must be included in the JSON response.
-            [Claims.Subject] = userId
+            [Claims.Subject] = query.Id
         };
 
         if (httpContext.User.HasScope(Scopes.Email))

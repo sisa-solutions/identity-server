@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 
+using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
 
 using Sisa.Abstractions;
@@ -40,7 +41,7 @@ public static class ConnectEndpoint
             await mediator.SendAsync(new GetConsentInfoQuery(), cancellationToken)
         );
 
-        group.MapPost("/consent", async ([AsParameters]ConfirmConsentCommand command, CancellationToken cancellationToken = default) =>
+        group.MapPost("/consent", async ([AsParameters] ConfirmConsentCommand command, CancellationToken cancellationToken = default) =>
             await mediator.SendAsync(command, cancellationToken)
         );
 
@@ -52,13 +53,16 @@ public static class ConnectEndpoint
             await mediator.SendAsync(new GetVerificationInfoQuery(), cancellationToken)
         );
 
-        group.MapPost("/verify", async ([AsParameters]ConfirmVerificationCommand query, CancellationToken cancellationToken = default) =>
+        group.MapPost("/verify", async ([AsParameters] ConfirmVerificationCommand query, CancellationToken cancellationToken = default) =>
             await mediator.SendAsync(query, cancellationToken)
         );
 
-        group.MapPost("/userinfo", async (GetUserInfoQuery command, CancellationToken cancellationToken = default) =>
+        group.MapPost("/userinfo", async (HttpContext httpContext, CancellationToken cancellationToken = default) =>
         {
-            var response = await mediator.SendAsync(command, cancellationToken);
+            var response = await mediator.SendAsync(new GetUserInfoQuery
+            {
+                Id = httpContext.User.GetClaim(Claims.Subject) ?? string.Empty
+            }, cancellationToken);
 
             if (response is null)
             {
