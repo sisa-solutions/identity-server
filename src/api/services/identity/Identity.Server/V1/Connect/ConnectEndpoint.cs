@@ -80,15 +80,6 @@ public static class ConnectEndpoint
             return TypedResults.Ok(response);
         });
 
-
-        // group.MapPost("/register", RegisterAsync);
-        // group.MapPost("/confirm-email", ConfirmEmailAsync);
-        // group.MapPost("/forgot-password", ForgotPasswordAsync);
-        // group.MapPost("/reset-password", ResetPasswordAsync);
-        // group.MapPost("/change-password", ChangePasswordAsync);
-        // group.MapPost("/change-email", ChangeEmailAsync);
-        // group.MapPost("/resend-email-confirmation", ResendEmailConfirmationAsync);
-
         return group;
     }
 }

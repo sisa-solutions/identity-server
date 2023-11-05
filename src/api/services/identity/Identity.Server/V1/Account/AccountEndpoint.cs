@@ -36,8 +36,11 @@ public static class AccountEndpoint
         group.MapPost("/login-with-recovery-code", async ([AsParameters] LoginWithRecoveryCodeCommand command, CancellationToken cancellationToken = default) =>
             await mediator.SendAsync(command, cancellationToken));
 
-        // group.MapPost("/logout", LogoutAsync);
         group.MapPost("/register", async ([AsParameters] RegisterCommand command, CancellationToken cancellationToken = default) =>
+            await mediator.SendAsync(command, cancellationToken)
+        );
+
+        group.MapPost("/resend-email-confirmation", async ([AsParameters] ResendEmailConfirmationCommand command, CancellationToken cancellationToken = default) =>
             await mediator.SendAsync(command, cancellationToken)
         );
 
@@ -54,7 +57,7 @@ public static class AccountEndpoint
 
         // group.MapPost("/change-password", ChangePasswordAsync);
         // group.MapPost("/change-email", ChangeEmailAsync);
-        // group.MapPost("/resend-email-confirmation", ResendEmailConfirmationAsync);
+
         return group;
     }
 }
