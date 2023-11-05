@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option csharp_namespace = "Sisa.Identity.Api.V1.Roles";
+
+package sisa.identity.api.v1.roles;
+
+import "google/api/annotations.proto";
+
+import "sisa/services/identity/v1/roles/commands.proto";
+import "sisa/services/identity/v1/roles/queries.proto";
+import "sisa/services/identity/v1/roles/responses.proto";
+
+service RoleGrpcService {
+  rpc GetListRoles(sisa.identity.api.v1.roles.queries.GetListRolesQuery) returns (sisa.identity.api.v1.roles.responses.ListRolesResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/roles"
+    };
+  }
+
+  rpc GetSingleRole(sisa.identity.api.v1.roles.queries.GetSingleRoleQuery) returns (sisa.identity.api.v1.roles.responses.RoleResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/roles/single"
+    };
+  }
+
+  rpc CreateRole(sisa.identity.api.v1.roles.commands.CreateRoleCommand) returns (sisa.identity.api.v1.roles.responses.RoleResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/roles"
+    };
+  }
+
+  rpc UpdateRole(sisa.identity.api.v1.roles.commands.UpdateRoleCommand) returns (sisa.identity.api.v1.roles.responses.RoleResponse) {
+    option (google.api.http) = {
+        put: "/api/v1/roles/{id}"
+    };
+  }
+}

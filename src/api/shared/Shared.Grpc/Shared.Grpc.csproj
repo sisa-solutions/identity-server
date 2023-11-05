@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Sisa.Shared.Grpc</AssemblyName>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+  </PropertyGroup>
+
+  <!-- BEGIN: Packages -->
+  <ItemGroup>
+    <PackageReference Include="Grpc.Tools">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <!-- END: Packages -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\libs\Core\Core.csproj" />
+     <ProjectReference Include="..\..\libs\Grpc\Grpc.csproj" />
+  </ItemGroup>
+
+  <!-- Begin: Protos -->
+  <ItemGroup>
+    <Protobuf
+      ProtoRoot="..\..\..\protos"
+      Include="..\..\..\protos\sisa\libs\**\*.proto"
+      GrpcServices="None"
+      Link="protos\sisa\libs\%(RecursiveDir)%(FileName)%(Extension)" />
+  </ItemGroup>
+  <!-- End: Protos -->
+
+</Project>

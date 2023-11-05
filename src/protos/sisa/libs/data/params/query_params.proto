@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option csharp_namespace = "Sisa.Data.Params";
+
+package sisa.data.params;
+
+import "sisa/libs/data/params/filtering_params.proto";
+import "sisa/libs/data/params/sorting_params.proto";
+import "sisa/libs/data/params/paging_params.proto";
+
+message QueryParams {
+  FilteringParams filter = 1;
+  SortingParams sortBy = 2;
+  PagingParams paging = 3;
+}

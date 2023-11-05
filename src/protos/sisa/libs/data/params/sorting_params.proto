@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option csharp_namespace = "Sisa.Data.Params";
+
+package sisa.data.params;
+
+import "sisa/libs/common/enums/sort_direction.proto";
+
+message SortingParams {
+  string field = 1;
+  sisa.grpc.enums.SortDirection sort = 2;
+}

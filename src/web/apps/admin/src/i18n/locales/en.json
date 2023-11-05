@@ -1,0 +1,108 @@
+{
+  "i18n": {
+    "en": "English",
+    "vi": "Vietnamese"
+  },
+  "format": {
+    "number": {
+      "default": "{{value, number}}",
+      "percent": "{{value, number(style: 'percent')}}",
+      "currency": "{{value, number(style: 'currency')}}",
+      "unit": "{{value, number(style: 'unit')}}",
+      "decimal": "{{value, number(style: 'decimal')}}"
+    },
+    "dateTime": {
+      "default": "{{value, datetime}}",
+      "short": "{{value, datetime(dateStyle: 'short')}}",
+      "medium": "{{value, datetime(dateStyle: 'medium')}}",
+      "long": "{{value, datetime(dateStyle: 'long')}}",
+      "full": "{{value, datetime(dateStyle: 'full')}}"
+    },
+    "relativeTime": {
+      "default": "{{value, relativeTime}}",
+      "second": "{{value, relativeTime(unit: 'second')}}",
+      "minute": "{{value, relativeTime(unit: 'minute')}}",
+      "hour": "{{value, relativeTime(unit: 'hour')}}",
+      "day": "{{value, relativeTime(unit: 'day')}}",
+      "week": "{{value, relativeTime(unit: 'week')}}",
+      "month": "{{value, relativeTime(unit: 'month')}}",
+      "year": "{{value, relativeTime(unit: 'year')}}"
+    },
+    "list": {
+      "default": "{{value, list}}",
+      "short": "{{value, list(type: 'short')}}",
+      "long": "{{value, list(type: 'long')}}",
+      "narrow": "{{value, list(type: 'full')}}"
+    }
+  },
+  "label": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "create": "Create",
+    "slug": "Slug",
+    "name": "Name",
+    "description": "Description",
+    "parentCategory": "Parent category",
+    "category": "Category",
+    "categories": "Categories",
+    "pictures": "Pictures",
+    "postCount": "Post count",
+    "createdBy": "Created by",
+    "createdAt": "Created at",
+    "updatedBy": "Updated by",
+    "updatedAt": "Updated at",
+    "email": "Email",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "agreeTermsAndPolicy": "Agree the <1>terms and policy</1>",
+    "details": "Details",
+    "addCategory": "Add category",
+    "editCategory": "Edit category",
+    "deleteCategory": "Delete category",
+    "clear": "Clear",
+    "search": "Search",
+    "edit": "Edit",
+    "delete": "Delete",
+    "comments": "Comments",
+    "keyword": "Keyword",
+    "post": "Post",
+    "posts": "Posts",
+    "addPost": "Add post",
+    "editPost": "Edit post",
+    "deletePost": "Delete post",
+    "title": "Title",
+    "excerpt": "Excerpt",
+    "content": "Content",
+    "tag": "Tag",
+    "tags": "Tags",
+    "addTag": "Add tag",
+    "editTag": "Edit tag",
+    "deleteTag": "Delete tag"
+  },
+  "title": {
+    "createNewAccount": "Create new account",
+    "signInToYourAccount": "Login to your account",
+    "forgotPassword": "Forgot password"
+  },
+  "paragraph": {
+    "orUseAnotherService": "or use another service to register",
+    "orContinueWith": "or continue with",
+    "alreadyHaveAccount": "Already have account? <1>Login</1>",
+    "forgotPassword": "I forgot password",
+    "dontHaveAccountYet": "Don't have account yet? <1>Register</1>",
+    "enterRegisteredEmail": "Enter your email associated with your account",
+    "weWillSendYouALink": "We will email you a link to reset your password",
+    "ihaveAccount": "I have account! <1>Login</1>"
+  },
+  "placeholder": {
+    "email": "Your email address",
+    "password": "Your password"
+  },
+  "validation": {
+    "agreeTermsAndPolicy": "You must agree to terms and policy",
+    "slug": {
+      "alreadyTaken": "Slug is already taken",
+      "format": "Slug must be formatted as kebab-case"
+    }
+  }
+}

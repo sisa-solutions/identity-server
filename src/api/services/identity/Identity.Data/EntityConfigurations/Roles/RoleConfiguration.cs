@@ -39,5 +39,9 @@ public class RoleConfiguration : EntityConfiguration<Role>
         builder.Property(t => t.Description)
             .HasMaxLength(RoleConstants.Description.MaxLength)
             .HasDefaultValueSql("''");
+
+        builder
+            .Property(x => x.Permissions)
+            .HasColumnType("text[]");
     }
 }

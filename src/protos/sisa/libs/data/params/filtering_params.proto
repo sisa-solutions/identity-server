@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option csharp_namespace = "Sisa.Data.Params";
+
+package sisa.data.params;
+
+import "sisa/libs/common/enums/combinator.proto";
+import "sisa/libs/common/enums/operator.proto";
+
+message FilterRule {
+  bool not = 1;
+  sisa.grpc.enums.Combinator combinator = 2;
+  repeated FilterRule rules = 3;
+
+  string field = 4;
+  string value = 5;
+  sisa.grpc.enums.Operator operator = 6;
+}
+
+message FilteringParams {
+  bool not = 1;
+  sisa.grpc.enums.Combinator combinator = 2;
+  repeated FilterRule rules = 3;
+}

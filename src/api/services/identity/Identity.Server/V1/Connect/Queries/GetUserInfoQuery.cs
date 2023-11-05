@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using OpenIddict.Abstractions;
 
 using Sisa.Abstractions;
+using Sisa.Constants;
 using Sisa.Identity.Domain.AggregatesModel.UserAggregate;
 using Sisa.Identity.Server.V1.Connect.Commands;
 
@@ -61,6 +62,12 @@ public class GetUserInfoQueryHandler(
             [Claims.Subject] = query.Id
         };
 
+        if (!string.IsNullOrEmpty(user.UserName))
+        {
+            claims[Claims.Name] = user.UserName;
+            claims[Claims.PreferredUsername] = user.UserName;
+        }
+
         if (httpContext.User.HasScope(Scopes.Email))
         {
             claims[Claims.Email] = user.Email ?? string.Empty;
@@ -76,16 +83,11 @@ public class GetUserInfoQueryHandler(
         if (httpContext.User.HasScope(Scopes.Roles))
         {
             claims[Claims.Role] = await userManager.GetRolesAsync(user);
+            // claims[SecurityClaimTypes.Permission] = "";
         }
 
         if (httpContext.User.HasScope(Scopes.Profile))
         {
-            if (!string.IsNullOrEmpty(user.UserName))
-            {
-                claims[Claims.Name] = user.UserName;
-                claims[Claims.PreferredUsername] = user.UserName;
-            }
-
             if (!string.IsNullOrEmpty(user.FirstName))
                 claims[Claims.GivenName] = user.FirstName;
 

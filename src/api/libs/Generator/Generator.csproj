@@ -24,13 +24,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Mediator\Templates\*.sbn-cs" />
-    <EmbeddedResource Include="Mediator\Templates\*.sbn-cs" />
+    <None Remove="FluentValidation\Templates\*.sbn-cs" />
+    <EmbeddedResource Include="FluentValidation\Templates\*.sbn-cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="FluentValidation\Templates\*.sbn-cs" />
-    <EmbeddedResource Include="FluentValidation\Templates\*.sbn-cs" />
+    <None Remove="Grpc\Templates\*.sbn-cs" />
+    <EmbeddedResource Include="Grpc\Templates\*.sbn-cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Mediator\Templates\*.sbn-cs" />
+    <EmbeddedResource Include="Mediator\Templates\*.sbn-cs" />
   </ItemGroup>
 
 </Project>

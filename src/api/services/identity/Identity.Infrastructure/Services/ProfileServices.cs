@@ -14,7 +14,7 @@ using Sisa.Identity.Infrastructure.Abstractions;
 namespace Sisa.Identity.Infrastructure.Services;
 
 [TransientService]
-public class ProfileService : IProfileService
+public class ProfileService
 {
     private readonly UserManager<User> _userManager;
     private readonly RoleManager<Role> _roleManager;

@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option csharp_namespace = "Sisa.Grpc.Enums";
+
+package sisa.grpc.enums;
+
+enum Combinator {
+  COMBINATOR_UNSPECIFIED = 0;
+  COMBINATOR_AND = 1;
+  COMBINATOR_OR = 2;
+}

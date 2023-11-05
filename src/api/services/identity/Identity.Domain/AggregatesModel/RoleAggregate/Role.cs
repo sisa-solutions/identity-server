@@ -16,6 +16,8 @@ public class Role : IdentityRole<Guid>, IAggregateRoot, IEntity<Guid>, ICreation
     public bool Enabled { get; private set; }
     // public string? Remarks { get; private set; }
 
+    public List<string> Permissions { get; } = [];
+
     private readonly List<UserRole> _userRoles;
     public virtual IReadOnlyCollection<UserRole> UserRoles => _userRoles;
 
@@ -24,23 +26,23 @@ public class Role : IdentityRole<Guid>, IAggregateRoot, IEntity<Guid>, ICreation
 
     public Role() : base()
     {
-        _userRoles = new List<UserRole>();
-        _roleClaims = new List<RoleClaim>();
+        _userRoles = [];
+        _roleClaims = [];
 
         Enabled = true;
     }
 
     public Role(string roleName) : base(roleName)
     {
-        _userRoles = new List<UserRole>();
-        _roleClaims = new List<RoleClaim>();
+        _userRoles = [];
+        _roleClaims = [];
     }
 
     public Role(string roleName, string description) : this(roleName)
         => Describe(description);
 
     public Role(string roleName, string description, bool predefined) : this(roleName, description)
-        => Predefined = true;
+        => Predefined = predefined;
 
     public void MakeAsPredefined() => Predefined = true;
 
@@ -64,15 +66,10 @@ public class Role : IdentityRole<Guid>, IAggregateRoot, IEntity<Guid>, ICreation
         // Remarks = remarks;
     }
 
-    public void UpdatePermissions(string[] permissions)
+    public void UpdatePermissions(IEnumerable<string> permissions)
     {
-        IEnumerable<string> permissionClaims = _roleClaims
-            .Where(x => x.ClaimType == SecurityClaimTypes.Permission && x.ClaimValue != null)
-            .Select(x => x.ClaimValue!)
-            .Distinct();
-
-        IEnumerable<string> permissionsToBeAdded = permissions.Except(permissionClaims);
-        IEnumerable<string> permissionsToBeDeleted = permissionClaims.Except(permissions);
+        IEnumerable<string> permissionsToBeAdded = permissions.Except(Permissions);
+        IEnumerable<string> permissionsToBeDeleted = Permissions.Except(permissions);
 
         _roleClaims.AddRange(permissionsToBeAdded.Select(x => new RoleClaim()
         {
@@ -82,6 +79,9 @@ public class Role : IdentityRole<Guid>, IAggregateRoot, IEntity<Guid>, ICreation
         }));
 
         _roleClaims.RemoveAll(x => x.ClaimType == SecurityClaimTypes.Permission && permissionsToBeDeleted.Contains(x.ClaimValue!));
+
+        Permissions.Clear();
+        Permissions.AddRange(permissions);
     }
 
     #region Auditing

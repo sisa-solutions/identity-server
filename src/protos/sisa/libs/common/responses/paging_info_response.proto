@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option csharp_namespace = "Sisa.Common.Responses";
+
+package sisa.common.responses;
+
+message PagingInfoResponse {
+  int32 pageIndex = 1;
+  int32 pageSize = 2;
+  
+  int64 itemCount = 3;
+  int32 pageCount = 4;
+}

@@ -1,0 +1,108 @@
+{
+  "i18n": {
+    "en": "Tiếng Anh",
+    "vi": "Tiếng Việt"
+  },
+  "format": {
+    "number": {
+      "default": "{{value, number}}",
+      "percent": "{{value, number(style: 'percent')}}",
+      "currency": "{{value, number(style: 'currency')}}",
+      "unit": "{{value, number(style: 'unit')}}",
+      "decimal": "{{value, number(style: 'decimal')}}"
+    },
+    "dateTime": {
+      "default": "{{value, datetime}}",
+      "short": "{{value, datetime(style: 'short')}}",
+      "medium": "{{value, datetime(style: 'medium')}}",
+      "long": "{{value, datetime(style: 'long')}}",
+      "full": "{{value, datetime(style: 'full')}}"
+    },
+    "relativeTime": {
+      "default": "{{value, relativeTime}}",
+      "second": "{{value, relativeTime(unit: 'second')}}",
+      "minute": "{{value, relativeTime(unit: 'minute')}}",
+      "hour": "{{value, relativeTime(unit: 'hour')}}",
+      "day": "{{value, relativeTime(unit: 'day')}}",
+      "week": "{{value, relativeTime(unit: 'week')}}",
+      "month": "{{value, relativeTime(unit: 'month')}}",
+      "year": "{{value, relativeTime(unit: 'year')}}"
+    },
+    "list": {
+      "default": "{{value, list}}",
+      "short": "{{value, list(type: 'short')}}",
+      "long": "{{value, list(type: 'long')}}",
+      "narrow": "{{value, list(type: 'full')}}"
+    }
+  },
+  "label": {
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "create": "Thêm mới",
+    "slug": "Slug",
+    "name": "Tên",
+    "description": "Chú thích",
+    "parentCategory": "Danh mục cha",
+    "category": "Danh mục",
+    "categories": "Danh mục",
+    "pictures": "Hình ảnh",
+    "postCount": "Số bài viết",
+    "createdBy": "Người tạo",
+    "createdAt": "Ngày tạo",
+    "updatedBy": "Người sửa",
+    "updatedAt": "Ngày sửa",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "rememberMe": "Ghi nhớ đăng nhập",
+    "agreeTermsAndPolicy": "Đồng ý với các <1>điều khoản và chính sách</1>",
+    "details": "Chi tiết",
+    "addCategory": "Thêm danh mục",
+    "editCategory": "Sửa danh mục",
+    "deleteCategory": "Xóa danh mục",
+    "clear": "Xóa",
+    "search": "Tìm kiếm",
+    "edit": "Sửa",
+    "delete": "Xóa",
+    "comments": "Bình luận",
+    "keyword": "Từ khóa",
+    "post": "Bài viết",
+    "posts": "Bài viết",
+    "addPost": "Thêm bài viết",
+    "editPost": "Sửa bài viết",
+    "deletePost": "Xóa bài viết",
+    "title": "Tiêu đề",
+    "excerpt": "Trích dẫn",
+    "content": "Nội dung",
+    "tag": "Thẻ",
+    "tags": "Thẻ",
+    "addTag": "Thêm thẻ",
+    "editTag": "Sửa thẻ",
+    "deleteTag": "Xóa thẻ"
+  },
+  "title": {
+    "createAnAccount": "Tạo tài khoản mới",
+    "signInToYourAccount": "Đăng nhập vào tài khoản của bạn",
+    "forgotPassword": "Quên mật khẩu"
+  },
+  "paragraph": {
+    "orUseAnotherService": "hoặc sử dụng dịch vụ khác để  đăng nhập",
+    "orContinueWith": "hoặc tiếp tục với",
+    "alreadyHaveAccount": "Bạn đã có tài khoản? <1>Đăng nhập</1>",
+    "forgotPassword": "Quên mật khẩu",
+    "dontHaveAccountYet": "Bạn chưa có tài khoản? <1>Đăng ký</1>",
+    "enterRegisteredEmail": "Nhập email đã đăng ký",
+    "weWillSendYouALink": "Chúng tôi sẽ gửi cho bạn một liên kết để đặt lại mật khẩu của bạn",
+    "ihaveAccount": "Tôi đã có tài khoản, <1>Đăng nhập</1>"
+  },
+  "placeholder": {
+    "email": "Nhập email",
+    "password": "Nhập mật khẩu"
+  },
+  "validation": {
+    "agreeTermsAndPolicy": "Bạn phải đồng ý với các điều khoản và chính sách",
+    "slug": {
+      "alreadyTaken": "Slug đã tồn tại",
+      "format": "Slug phải được định dạng theo kiểu kebab-case"
+    }
+  }
+}

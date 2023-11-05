@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option csharp_namespace = "Sisa.Grpc.Enums";
+
+package sisa.grpc.enums;
+
+enum SortDirection {
+  SORT_DIRECTION_UNSPECIFIED = 0; // unspecified
+  SORT_DIRECTION_ASC = 1; // ascending
+  SORT_DIRECTION_DESC = 2; // descending
+}

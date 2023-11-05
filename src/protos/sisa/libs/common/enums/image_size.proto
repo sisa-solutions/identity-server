@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option csharp_namespace = "Sisa.Grpc.Enums";
+
+package sisa.grpc.enums;
+
+enum ImageSize {
+  IMAGE_SIZE_UNSPECIFIED = 0;
+  IMAGE_SIZE_XS = 1;
+  IMAGE_SIZE_SM = 2;
+  IMAGE_SIZE_MD = 3;
+  IMAGE_SIZE_LG = 5;
+  IMAGE_SIZE_XL = 6;
+}

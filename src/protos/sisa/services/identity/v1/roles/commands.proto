@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option csharp_namespace = "Sisa.Identity.Api.V1.Roles.Commands";
+
+package sisa.identity.api.v1.roles.commands;
+
+import "google/protobuf/wrappers.proto";
+
+message CreateRoleCommand {
+  // reversed field must be reflect to the database
+  reserved 1, 4, 7 to 50; // other data fields
+  reserved 52 to 60; // relationship fields
+
+  // data fields: from 1 to 50
+  string name = 2;
+  google.protobuf.StringValue description = 3;
+  bool enabled = 5;
+  repeated string permissions = 6;
+
+  // relationship fields: from 51 to 60
+  // google.protobuf.StringValue parentId = 51;
+}
+
+message UpdateRoleCommand {
+  // reversed field must be reflect to the database
+  reserved 4, 7 to 50; // other data fields
+  reserved 52 to 60; // relationship fields
+  reserved 63 to 70; // audit fields
+
+  // data fields: from 1 to 50
+  string id = 1;
+  string name = 2;
+  google.protobuf.StringValue description = 3;
+  bool enabled = 5;
+  repeated string permissions = 6;
+
+  // relationship fields: from 51 to 60
+  // google.protobuf.StringValue parentId = 51;
+}

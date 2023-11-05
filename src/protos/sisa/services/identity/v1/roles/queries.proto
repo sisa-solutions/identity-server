@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "Sisa.Identity.Api.V1.Roles.Queries";
+
+package sisa.identity.api.v1.roles.queries;
+
+import "sisa/libs/data/params/filtering_params.proto";
+import "sisa/libs/data/params/sorting_params.proto";
+import "sisa/libs/data/params/paging_params.proto";
+
+message GetSingleRoleQuery {
+  sisa.data.params.FilteringParams filter = 1;
+}
+
+message GetListRolesQuery {
+  sisa.data.params.FilteringParams filter = 1;
+  repeated sisa.data.params.SortingParams sortBy = 2;
+  sisa.data.params.PagingParams paging = 3;
+}

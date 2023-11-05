@@ -24,5 +24,6 @@ public class IdentityDbContextFactory : IDesignTimeDbContextFactory<IdentityDbCo
      * dotnet ef migrations script -i -c Sisa.Identity.Data.IdentityDbContext -o PostgreSQL/Scripts/000_Snapshot.sql
      *
      * dotnet ef migrations script -i -c Sisa.Identity.Data.IdentityDbContext 0 Initialize -o PostgreSQL/Scripts/010_Initialize.sql
+     * dotnet ef migrations script -i -c Sisa.Identity.Data.IdentityDbContext Initialize AddPermissionsToRole -o PostgreSQL/Scripts/011_AddPermissionsToRole.sql
      */
 }
