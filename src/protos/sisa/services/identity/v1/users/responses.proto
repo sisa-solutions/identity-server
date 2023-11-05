@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option csharp_namespace = "Sisa.Identity.Api.V1.Users.Responses";
+
+package sisa.identity.api.v1.users.responses;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+import "sisa/libs/common/enums/gender.proto";
+
+import "sisa/libs/common/responses/paging_info_response.proto";
+import "sisa/libs/common/responses/actor_info_response.proto";
+
+message UserResponse {
+  // reversed field must be reflect to the database
+  reserved 5, 12 to 50; // other data fields
+  reserved 52 to 60; // relationship fields
+  reserved 61 to 70; // audit fields
+
+  // data fields: from 1 to 50
+  string id = 1;
+  string username = 2;
+  google.protobuf.StringValue email = 3;
+  google.protobuf.StringValue phoneNumber = 4;
+  
+  google.protobuf.StringValue firstName = 6;
+  google.protobuf.StringValue lastName = 7;
+  google.protobuf.StringValue fullName = 8;
+  sisa.grpc.enums.Gender gender = 9;
+  google.protobuf.Timestamp birthDate = 10;
+  repeated string roles = 11;
+
+  // relationship fields: from 51 to 60
+
+  // audit fields: from 63 to 70
+  // sisa.common.responses.ActorInfoResponse creator = 61;
+  // sisa.common.responses.ActorInfoResponse updater = 62;
+}
+
+message ListUsersResponse {
+  repeated UserResponse value = 1;
+  sisa.common.responses.PagingInfoResponse paging = 2;
+}

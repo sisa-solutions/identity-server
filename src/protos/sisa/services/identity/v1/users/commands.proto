@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+option csharp_namespace = "Sisa.Identity.Api.V1.Users.Commands";
+
+package sisa.identity.api.v1.users.commands;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+import "sisa/libs/common/enums/gender.proto";
+
+message CreateUserCommand {
+  // reversed field must be reflect to the database
+  reserved 1, 12 to 50; // other data fields
+  reserved 51 to 60; // relationship fields
+
+  // data fields: from 1 to 50
+  string username = 2;
+  google.protobuf.StringValue email = 3;
+  google.protobuf.StringValue phoneNumber = 4;
+  google.protobuf.StringValue password = 5;
+  
+  google.protobuf.StringValue firstName = 6;
+  google.protobuf.StringValue lastName = 7;
+  google.protobuf.StringValue fullName = 8;
+  sisa.grpc.enums.Gender gender = 9;
+  google.protobuf.Timestamp birthDate = 10;
+  google.protobuf.StringValue avatar = 11;
+
+  // relationship fields: from 51 to 60
+}
+
+message UpdateUserCommand {
+  // reversed field must be reflect to the database
+  reserved 2, 3, 4, 5, 12 to 50; // other data fields
+  reserved 51 to 60; // relationship fields
+  reserved 63 to 70; // audit fields
+
+  // data fields: from 1 to 50
+  string id = 1;
+  google.protobuf.StringValue firstName = 6;
+  google.protobuf.StringValue lastName = 7;
+  google.protobuf.StringValue fullName = 8;
+  sisa.grpc.enums.Gender gender = 9;
+  google.protobuf.Timestamp birthDate = 10;
+  google.protobuf.StringValue avatar = 11;
+
+  // relationship fields: from 51 to 60
+}
+
+message UpdateRolesCommand {
+  // reversed field must be reflect to the database
+  reserved 13 to 50; // other data fields
+  reserved 51 to 60; // relationship fields
+  reserved 63 to 70; // audit fields
+
+  // data fields: from 1 to 50
+  string id = 1;
+  repeated string roles = 12;
+
+  // relationship fields: from 51 to 60
+}
+
+message BlockAccountCommand {
+  string id = 1;
+}
+
+message UnblockAccountCommand {
+  string id = 1;
+}
+
+message UpdateAvatarCommand {
+  // reversed field must be reflect to the database
+  reserved 2, 3, 4, 5, 6, 7, 8, 9, 10, 12 to 50; // other data fields
+  reserved 51 to 60; // relationship fields
+  reserved 63 to 70; // audit fields
+
+  // data fields: from 1 to 50
+  string id = 1;
+  google.protobuf.StringValue avatar = 11;
+
+  // relationship fields: from 51 to 60
+}

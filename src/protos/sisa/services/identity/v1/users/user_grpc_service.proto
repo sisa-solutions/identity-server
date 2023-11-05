@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option csharp_namespace = "Sisa.Identity.Api.V1.Users";
+
+package sisa.identity.api.v1.users;
+
+import "google/api/annotations.proto";
+
+import "sisa/services/identity/v1/users/commands.proto";
+import "sisa/services/identity/v1/users/queries.proto";
+import "sisa/services/identity/v1/users/responses.proto";
+
+service UserGrpcService {
+  rpc GetListUsers(sisa.identity.api.v1.users.queries.GetListUsersQuery) returns (sisa.identity.api.v1.users.responses.ListUsersResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/users/list"
+    };
+  }
+
+  rpc GetSingleUser(sisa.identity.api.v1.users.queries.GetSingleUserQuery) returns (sisa.identity.api.v1.users.responses.UserResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/users/single"
+    };
+  }
+
+  rpc CreateUser(sisa.identity.api.v1.users.commands.CreateUserCommand) returns (sisa.identity.api.v1.users.responses.UserResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/users/create"
+    };
+  }
+
+  rpc UpdateUser(sisa.identity.api.v1.users.commands.UpdateUserCommand) returns (sisa.identity.api.v1.users.responses.UserResponse) {
+    option (google.api.http) = {
+        put: "/api/v1/users/{id}/update"
+    };
+  }
+}

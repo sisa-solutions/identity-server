@@ -17,6 +17,7 @@ public class User : IdentityUser<Guid>, IAggregateRoot, IEntity<Guid>, ICreation
 
     [PersonalData]
     public string? FullName { get; private set; } = string.Empty;
+
     [PersonalData]
     public Gender Gender { get; private set; } = Gender.UNSPECIFIED;
 
@@ -137,15 +138,15 @@ public class User : IdentityUser<Guid>, IAggregateRoot, IEntity<Guid>, ICreation
 
     public UserStatus[] AllowedNextStatues => Status switch
     {
-        UserStatus.NEW => new[] { UserStatus.REGISTERED },
-        UserStatus.REGISTERED => new[] { UserStatus.ACTIVE, UserStatus.INACTIVE },
-        UserStatus.ACTIVE => new[] { UserStatus.PASSWORD_EXPIRED, UserStatus.LOCKED_OUT, UserStatus.INACTIVE, UserStatus.SUSPENDED },
-        UserStatus.LOCKED_OUT => new[] { UserStatus.RECOVERY },
-        UserStatus.INACTIVE => new[] { UserStatus.RECOVERY },
-        UserStatus.SUSPENDED => new[] { UserStatus.RECOVERY },
-        UserStatus.PASSWORD_EXPIRED => new[] { UserStatus.RECOVERY },
-        UserStatus.RECOVERY => new[] { UserStatus.ACTIVE, UserStatus.INACTIVE, },
-        _ => new UserStatus[] { },
+        UserStatus.NEW => [UserStatus.REGISTERED],
+        UserStatus.REGISTERED => [UserStatus.ACTIVE, UserStatus.INACTIVE],
+        UserStatus.ACTIVE => [UserStatus.PASSWORD_EXPIRED, UserStatus.LOCKED_OUT, UserStatus.INACTIVE, UserStatus.SUSPENDED],
+        UserStatus.LOCKED_OUT => [UserStatus.RECOVERY],
+        UserStatus.INACTIVE => [UserStatus.RECOVERY],
+        UserStatus.SUSPENDED => [UserStatus.RECOVERY],
+        UserStatus.PASSWORD_EXPIRED => [UserStatus.RECOVERY],
+        UserStatus.RECOVERY => [UserStatus.ACTIVE, UserStatus.INACTIVE,],
+        _ => [],
     };
 
     public bool IsAllowedToChangeStatus(UserStatus nextStatus)
@@ -161,13 +162,13 @@ public class User : IdentityUser<Guid>, IAggregateRoot, IEntity<Guid>, ICreation
         return true;
     }
 
-    public bool UnblockUser(string? remarks)
+    public bool UnblockAccount(string? remarks)
     {
         LockoutEnd = null;
         return TryToChangeStatus(UserStatus.ACTIVE, remarks);
     }
 
-    public bool BlockUser(int lockoutDuration, string? remarks)
+    public bool BlockAccount(int lockoutDuration, string? remarks)
     {
         LockoutEnd = DateTimeOffset.UtcNow.AddHours(lockoutDuration);
         return TryToChangeStatus(UserStatus.LOCKED_OUT, remarks);
